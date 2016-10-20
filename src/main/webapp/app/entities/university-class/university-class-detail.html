@@ -1,0 +1,53 @@
+
+<div>
+    <h2><span data-translate="navAppApp.universityClass.detail.title">University Class</span> {{vm.universityClass.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="navAppApp.universityClass.name">Name</span></dt>
+        <dd>
+            <span>{{vm.universityClass.name}}</span>
+        </dd>
+        <dt><span data-translate="navAppApp.universityClass.description">Description</span></dt>
+        <dd>
+            <span>{{vm.universityClass.description}}</span>
+        </dd>
+        <dt><span data-translate="navAppApp.universityClass.type">Type</span></dt>
+        <dd>
+            <span data-translate="{{'navAppApp.ClassType.' + vm.universityClass.type}}">{{vm.universityClass.type}}</span>
+        </dd>
+        <dt><span data-translate="navAppApp.universityClass.startHour">Start Hour</span></dt>
+        <dd>
+            <span>{{vm.universityClass.startHour}}</span>
+        </dd>
+        <dt><span data-translate="navAppApp.universityClass.endHour">End Hour</span></dt>
+        <dd>
+            <span>{{vm.universityClass.endHour}}</span>
+        </dd>
+        <dt><span data-translate="navAppApp.universityClass.weekday">Weekday</span></dt>
+        <dd>
+            <span data-translate="{{'navAppApp.Weekday.' + vm.universityClass.weekday}}">{{vm.universityClass.weekday}}</span>
+        </dd>
+        <dt><span data-translate="navAppApp.universityClass.lecturers">Lecturers</span></dt>
+        <dd>
+            <span ng-repeat="lecturers in vm.universityClass.lecturers">
+                <a ui-sref="lecturer-detail({id: lecturers.id})">{{lecturers.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span data-translate="navAppApp.universityClass.classroom">Classroom</span></dt>
+        <dd>
+            <a ui-sref="classroom-detail({id:vm.universityClass.classroom.id})">{{vm.universityClass.classroom.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="university-class-detail.edit({id:vm.universityClass.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

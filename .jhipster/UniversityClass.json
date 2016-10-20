@@ -1,0 +1,59 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "classes",
+            "relationshipName": "lecturers",
+            "otherEntityName": "lecturer",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "classroom",
+            "otherEntityName": "classroom",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "groups",
+            "otherEntityName": "universityGroup",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "classes"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "ClassType",
+            "fieldValues": "LECTURE,LABORATORY,EXERCISE,SPORT,LANGUAGE,SEMINARY,EXTRA"
+        },
+        {
+            "fieldName": "startHour",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "endHour",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "weekday",
+            "fieldType": "Weekday",
+            "fieldValues": "MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY"
+        }
+    ],
+    "changelogDate": "20161020215258",
+    "entityTableName": "university_class",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl"
+}

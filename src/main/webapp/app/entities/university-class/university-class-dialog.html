@@ -1,0 +1,84 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myUniversityClassLabel" data-translate="navAppApp.universityClass.home.createOrEditLabel">Create or edit a University Class</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.universityClass.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.universityClass.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="navAppApp.universityClass.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.universityClass.name"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="navAppApp.universityClass.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="vm.universityClass.description"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="navAppApp.universityClass.type" for="field_type">Type</label>
+            <select class="form-control" name="type" ng-model="vm.universityClass.type" id="field_type">
+                <option value="LECTURE" data-translate="navAppApp.ClassType.LECTURE">LECTURE</option>
+                <option value="LABORATORY" data-translate="navAppApp.ClassType.LABORATORY">LABORATORY</option>
+                <option value="EXERCISE" data-translate="navAppApp.ClassType.EXERCISE">EXERCISE</option>
+                <option value="SPORT" data-translate="navAppApp.ClassType.SPORT">SPORT</option>
+                <option value="LANGUAGE" data-translate="navAppApp.ClassType.LANGUAGE">LANGUAGE</option>
+                <option value="SEMINARY" data-translate="navAppApp.ClassType.SEMINARY">SEMINARY</option>
+                <option value="EXTRA" data-translate="navAppApp.ClassType.EXTRA">EXTRA</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="navAppApp.universityClass.startHour" for="field_startHour">Start Hour</label>
+            <input type="number" class="form-control" name="startHour" id="field_startHour"
+                    ng-model="vm.universityClass.startHour"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="navAppApp.universityClass.endHour" for="field_endHour">End Hour</label>
+            <input type="number" class="form-control" name="endHour" id="field_endHour"
+                    ng-model="vm.universityClass.endHour"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="navAppApp.universityClass.weekday" for="field_weekday">Weekday</label>
+            <select class="form-control" name="weekday" ng-model="vm.universityClass.weekday" id="field_weekday">
+                <option value="MONDAY" data-translate="navAppApp.Weekday.MONDAY">MONDAY</option>
+                <option value="TUESDAY" data-translate="navAppApp.Weekday.TUESDAY">TUESDAY</option>
+                <option value="WEDNESDAY" data-translate="navAppApp.Weekday.WEDNESDAY">WEDNESDAY</option>
+                <option value="THURSDAY" data-translate="navAppApp.Weekday.THURSDAY">THURSDAY</option>
+                <option value="FRIDAY" data-translate="navAppApp.Weekday.FRIDAY">FRIDAY</option>
+                <option value="SATURDAY" data-translate="navAppApp.Weekday.SATURDAY">SATURDAY</option>
+                <option value="SUNDAY" data-translate="navAppApp.Weekday.SUNDAY">SUNDAY</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="navAppApp.universityClass.lecturers" for="field_lecturers">Lecturers</label>
+            <select class="form-control" id="field_lecturers" multiple name="lecturers" ng-model="vm.universityClass.lecturers" ng-options="lecturer as lecturer.id for lecturer in vm.lecturers track by lecturer.id"></select>
+        </div>
+        <div class="form-group">
+            <label data-translate="navAppApp.universityClass.classroom" for="field_classroom">Classroom</label>
+            <select class="form-control" id="field_classroom" name="classroom" ng-model="vm.universityClass.classroom" ng-options="classroom as classroom.id for classroom in vm.classrooms track by classroom.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

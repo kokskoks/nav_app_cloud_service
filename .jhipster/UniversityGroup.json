@@ -1,0 +1,36 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "groups",
+            "relationshipName": "classes",
+            "otherEntityName": "universityClass",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "semester",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "specialisation",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20161020215201",
+    "entityTableName": "university_group",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl"
+}

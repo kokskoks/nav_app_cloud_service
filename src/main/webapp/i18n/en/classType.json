@@ -1,0 +1,14 @@
+{
+    "navAppApp": {
+        "ClassType" : {
+            "null": "",
+            "LECTURE": "LECTURE",
+            "LABORATORY": "LABORATORY",
+            "EXERCISE": "EXERCISE",
+            "SPORT": "SPORT",
+            "LANGUAGE": "LANGUAGE",
+            "SEMINARY": "SEMINARY",
+            "EXTRA": "EXTRA"
+        }
+    }
+}

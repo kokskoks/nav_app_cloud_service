@@ -61,6 +61,4 @@ relationship ManyToMany {
 }
 
 
-dto * with mapstruct
-
 service all with serviceImpl

@@ -1,0 +1,36 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "classes",
+            "otherEntityName": "universityClass",
+            "otherEntityRelationshipName": "classroom"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "building",
+            "otherEntityName": "building",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "desription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "floor",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20161020215259",
+    "entityTableName": "classroom",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl"
+}

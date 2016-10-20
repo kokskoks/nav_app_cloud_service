@@ -1,0 +1,38 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "rooms",
+            "otherEntityName": "classroom",
+            "otherEntityRelationshipName": "building"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "street",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "longitude",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "latitude",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20161020215200",
+    "entityTableName": "building",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl"
+}

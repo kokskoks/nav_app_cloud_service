@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span data-translate="navAppApp.lecturer.detail.title">Lecturer</span> {{vm.lecturer.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="navAppApp.lecturer.firstName">First Name</span></dt>
+        <dd>
+            <span>{{vm.lecturer.firstName}}</span>
+        </dd>
+        <dt><span data-translate="navAppApp.lecturer.lastName">Last Name</span></dt>
+        <dd>
+            <span>{{vm.lecturer.lastName}}</span>
+        </dd>
+        <dt><span data-translate="navAppApp.lecturer.title">Title</span></dt>
+        <dd>
+            <span>{{vm.lecturer.title}}</span>
+        </dd>
+        <dt><span data-translate="navAppApp.lecturer.description">Description</span></dt>
+        <dd>
+            <span>{{vm.lecturer.description}}</span>
+        </dd>
+        <dt><span data-translate="navAppApp.lecturer.mail">Mail</span></dt>
+        <dd>
+            <span>{{vm.lecturer.mail}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="lecturer-detail.edit({id:vm.lecturer.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

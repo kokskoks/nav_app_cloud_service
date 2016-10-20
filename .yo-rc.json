@@ -29,6 +29,7 @@
       "en",
       "de",
       "pl"
-    ]
+    ],
+    "serviceDiscoveryType": false
   }
 }

@@ -1,0 +1,27 @@
+{
+    "navAppApp": {
+        "lecturer" : {
+            "home": {
+                "title": "Lecturers",
+                "createLabel": "Lecturer erstellen",
+                "createOrEditLabel": "Lecturer erstellen oder bearbeiten",
+                "search": "Suche nach Lecturer"
+            },
+            "created": "Lecturer erstellt mit ID {{ param }}",
+            "updated": "Lecturer aktualisiert mit ID {{ param }}",
+            "deleted": "Lecturer gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Lecturer {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Lecturer"
+            },
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "title": "Title",
+            "description": "Description",
+            "mail": "Mail",
+            "classes": "Classes"
+        }
+    }
+}

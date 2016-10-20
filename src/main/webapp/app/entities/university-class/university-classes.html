@@ -1,0 +1,76 @@
+<div>
+    <h2 data-translate="navAppApp.universityClass.home.title">University Classes</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="university-class.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="navAppApp.universityClass.home.createLabel">
+                        Create new University Class
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span data-translate="global.field.id">ID</span></th>
+                    <th><span data-translate="navAppApp.universityClass.name">Name</span></th>
+                    <th><span data-translate="navAppApp.universityClass.description">Description</span></th>
+                    <th><span data-translate="navAppApp.universityClass.type">Type</span></th>
+                    <th><span data-translate="navAppApp.universityClass.startHour">Start Hour</span></th>
+                    <th><span data-translate="navAppApp.universityClass.endHour">End Hour</span></th>
+                    <th><span data-translate="navAppApp.universityClass.weekday">Weekday</span></th>
+                    <th><span data-translate="navAppApp.universityClass.lecturers">Lecturers</span></th>
+                    <th><span data-translate="navAppApp.universityClass.classroom">Classroom</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="universityClass in vm.universityClasses track by universityClass.id">
+                    <td><a ui-sref="university-class-detail({id:universityClass.id})">{{universityClass.id}}</a></td>
+                    <td>{{universityClass.name}}</td>
+                    <td>{{universityClass.description}}</td>
+                    <td data-translate="{{'navAppApp.ClassType.' + universityClass.type}}">{{universityClass.type}}</td>
+                    <td>{{universityClass.startHour}}</td>
+                    <td>{{universityClass.endHour}}</td>
+                    <td data-translate="{{'navAppApp.Weekday.' + universityClass.weekday}}">{{universityClass.weekday}}</td>
+                    <td>
+                        <span ng-repeat="lecturers in universityClass.lecturers">
+                            <a class="form-control-static" ui-sref="lecturer-detail({id: lecturers.id})">{{lecturers.id}}</a>{{$last ? '' : ', '}}
+                        </span>
+                    </td>
+                    <td>
+                        <a ui-sref="classroom-detail({id:universityClass.classroom.id})">{{universityClass.classroom.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="university-class-detail({id:universityClass.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="university-class.edit({id:universityClass.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="university-class.delete({id:universityClass.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

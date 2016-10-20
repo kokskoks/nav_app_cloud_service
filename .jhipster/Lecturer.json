@@ -1,0 +1,39 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "classes",
+            "otherEntityName": "universityClass",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "lecturers"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "firstName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mail",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20161020215202",
+    "entityTableName": "lecturer",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl"
+}

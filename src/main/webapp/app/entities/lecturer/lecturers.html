@@ -1,0 +1,64 @@
+<div>
+    <h2 data-translate="navAppApp.lecturer.home.title">Lecturers</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="lecturer.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="navAppApp.lecturer.home.createLabel">
+                        Create new Lecturer
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span data-translate="global.field.id">ID</span></th>
+                    <th><span data-translate="navAppApp.lecturer.firstName">First Name</span></th>
+                    <th><span data-translate="navAppApp.lecturer.lastName">Last Name</span></th>
+                    <th><span data-translate="navAppApp.lecturer.title">Title</span></th>
+                    <th><span data-translate="navAppApp.lecturer.description">Description</span></th>
+                    <th><span data-translate="navAppApp.lecturer.mail">Mail</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="lecturer in vm.lecturers track by lecturer.id">
+                    <td><a ui-sref="lecturer-detail({id:lecturer.id})">{{lecturer.id}}</a></td>
+                    <td>{{lecturer.firstName}}</td>
+                    <td>{{lecturer.lastName}}</td>
+                    <td>{{lecturer.title}}</td>
+                    <td>{{lecturer.description}}</td>
+                    <td>{{lecturer.mail}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="lecturer-detail({id:lecturer.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="lecturer.edit({id:lecturer.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="lecturer.delete({id:lecturer.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

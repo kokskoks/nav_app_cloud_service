@@ -1,0 +1,27 @@
+{
+    "navAppApp": {
+        "building" : {
+            "home": {
+                "title": "Buildings",
+                "createLabel": "Building erstellen",
+                "createOrEditLabel": "Building erstellen oder bearbeiten",
+                "search": "Suche nach Building"
+            },
+            "created": "Building erstellt mit ID {{ param }}",
+            "updated": "Building aktualisiert mit ID {{ param }}",
+            "deleted": "Building gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Building {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Building"
+            },
+            "name": "Name",
+            "description": "Description",
+            "street": "Street",
+            "longitude": "Longitude",
+            "latitude": "Latitude",
+            "rooms": "Rooms"
+        }
+    }
+}

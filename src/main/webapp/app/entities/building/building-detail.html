@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span data-translate="navAppApp.building.detail.title">Building</span> {{vm.building.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="navAppApp.building.name">Name</span></dt>
+        <dd>
+            <span>{{vm.building.name}}</span>
+        </dd>
+        <dt><span data-translate="navAppApp.building.description">Description</span></dt>
+        <dd>
+            <span>{{vm.building.description}}</span>
+        </dd>
+        <dt><span data-translate="navAppApp.building.street">Street</span></dt>
+        <dd>
+            <span>{{vm.building.street}}</span>
+        </dd>
+        <dt><span data-translate="navAppApp.building.longitude">Longitude</span></dt>
+        <dd>
+            <span>{{vm.building.longitude}}</span>
+        </dd>
+        <dt><span data-translate="navAppApp.building.latitude">Latitude</span></dt>
+        <dd>
+            <span>{{vm.building.latitude}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="building-detail.edit({id:vm.building.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

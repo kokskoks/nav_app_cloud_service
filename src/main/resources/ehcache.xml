@@ -37,5 +37,49 @@
            timeToLiveSeconds="3600">
     </cache>
     
+    <cache name="pl.lodz.p.ind179640.domain.Building"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="pl.lodz.p.ind179640.domain.Building.rooms"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="pl.lodz.p.ind179640.domain.UniversityGroup"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="pl.lodz.p.ind179640.domain.UniversityGroup.classes"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="pl.lodz.p.ind179640.domain.Lecturer"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="pl.lodz.p.ind179640.domain.Lecturer.classes"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="pl.lodz.p.ind179640.domain.UniversityClass"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="pl.lodz.p.ind179640.domain.UniversityClass.lecturers"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="pl.lodz.p.ind179640.domain.UniversityClass.groups"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="pl.lodz.p.ind179640.domain.Classroom"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="pl.lodz.p.ind179640.domain.Classroom.classes"
+        timeToLiveSeconds="3600">
+    </cache>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </ehcache>

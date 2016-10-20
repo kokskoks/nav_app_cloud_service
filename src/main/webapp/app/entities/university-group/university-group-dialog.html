@@ -1,0 +1,54 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myUniversityGroupLabel" data-translate="navAppApp.universityGroup.home.createOrEditLabel">Create or edit a University Group</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.universityGroup.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.universityGroup.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="navAppApp.universityGroup.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.universityGroup.name"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="navAppApp.universityGroup.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="vm.universityGroup.description"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="navAppApp.universityGroup.semester" for="field_semester">Semester</label>
+            <input type="number" class="form-control" name="semester" id="field_semester"
+                    ng-model="vm.universityGroup.semester"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="navAppApp.universityGroup.specialisation" for="field_specialisation">Specialisation</label>
+            <input type="checkbox" class="form-control" name="specialisation" id="field_specialisation"
+                    ng-model="vm.universityGroup.specialisation"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="navAppApp.universityGroup.classes" for="field_classes">Classes</label>
+            <select class="form-control" id="field_classes" multiple name="classes" ng-model="vm.universityGroup.classes" ng-options="universityClass as universityClass.id for universityClass in vm.universityclasses track by universityClass.id"></select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
