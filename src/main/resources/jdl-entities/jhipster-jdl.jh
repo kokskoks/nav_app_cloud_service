@@ -45,11 +45,11 @@ entity Lecturer {
 }
 
 relationship OneToMany {
-	Classroom{building} to Building{rooms}
+	Building{rooms} to Classroom{building}
 }
 
 relationship OneToMany{
-	UniversityClass{classroom} to Classroom{classes}
+	Classroom{classes} to UniversityClass{classroom}
 }
 
 relationship ManyToMany {
