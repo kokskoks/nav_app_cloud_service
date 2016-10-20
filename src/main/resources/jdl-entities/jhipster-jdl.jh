@@ -1,4 +1,4 @@
-entity Class {
+entity UniversityClass {
 	name String
     description String
     type ClassType
@@ -49,20 +49,19 @@ relationship OneToMany {
 }
 
 relationship OneToMany{
-	Class{classroom} to Classroom{classes}
+	UniversityClass{classroom} to Classroom{classes}
 }
 
 relationship ManyToMany {
-	Class{lecturers} to Lecturer{classes}
+	UniversityClass{lecturers} to Lecturer{classes}
 }
 
 relationship ManyToMany {
-	Group{classes} to Class{groups}
+	Group{classes} to UniversityClass{groups}
 }
 
 
 
 dto * with mapstruct
 
-// Set service options to all except few
 service all with serviceImpl
