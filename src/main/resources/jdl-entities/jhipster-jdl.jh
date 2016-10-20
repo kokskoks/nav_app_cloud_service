@@ -25,8 +25,8 @@ entity Building {
 	name String
     description String
     street String
-    lat Double
-    long Double
+    longitude Double
+    latitude Double
 }
 
 entity Group {
