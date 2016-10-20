@@ -1,0 +1,68 @@
+entity Class {
+	name String
+    description String
+    type ClassType
+    startHour Integer
+    endHour Integer
+    weekday Weekday
+}
+
+enum Weekday {
+	MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+}
+
+enum ClassType {
+	LECTURE, LABORATORY, EXERCISE, SPORT, LANGUAGE, SEMINARY, EXTRA
+}
+
+entity Classroom {
+	name String
+    desription String
+    floor Integer
+}
+
+entity Building {
+	name String
+    description String
+    street String
+    lat Double
+    long Double
+}
+
+entity Group {
+	name String
+    description String
+    semester Integer
+    specialisation Boolean
+}
+
+entity Lecturer {
+	firstName String
+    lastName String
+    title String
+    description String
+    mail String
+}
+
+relationship OneToMany {
+	Classroom{building} to Building{rooms}
+}
+
+relationship OneToMany{
+	Class{classroom} to Classroom{classes}
+}
+
+relationship ManyToMany {
+	Class{lecturers} to Lecturer{classes}
+}
+
+relationship ManyToMany {
+	Group{classes} to Class{groups}
+}
+
+
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
