@@ -5,9 +5,9 @@
         .module('navAppApp')
         .controller('UniversityClassDetailController', UniversityClassDetailController);
 
-    UniversityClassDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'UniversityClass', 'Lecturer', 'Classroom', 'UniversityGroup'];
+    UniversityClassDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'UniversityClass', 'Week', 'Lecturer', 'Classroom', 'UniversityGroup'];
 
-    function UniversityClassDetailController($scope, $rootScope, $stateParams, previousState, entity, UniversityClass, Lecturer, Classroom, UniversityGroup) {
+    function UniversityClassDetailController($scope, $rootScope, $stateParams, previousState, entity, UniversityClass, Week, Lecturer, Classroom, UniversityGroup) {
         var vm = this;
 
         vm.universityClass = entity;

@@ -13,10 +13,10 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface UniversityClassRepository extends JpaRepository<UniversityClass,Long> {
 
-    @Query("select distinct universityClass from UniversityClass universityClass left join fetch universityClass.lecturers")
+    @Query("select distinct universityClass from UniversityClass universityClass left join fetch universityClass.weeks left join fetch universityClass.lecturers")
     List<UniversityClass> findAllWithEagerRelationships();
 
-    @Query("select universityClass from UniversityClass universityClass left join fetch universityClass.lecturers where universityClass.id =:id")
+    @Query("select universityClass from UniversityClass universityClass left join fetch universityClass.weeks left join fetch universityClass.lecturers where universityClass.id =:id")
     UniversityClass findOneWithEagerRelationships(@Param("id") Long id);
 
 }

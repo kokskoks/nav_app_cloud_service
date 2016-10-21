@@ -5,14 +5,15 @@
         .module('navAppApp')
         .controller('UniversityClassDialogController', UniversityClassDialogController);
 
-    UniversityClassDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'UniversityClass', 'Lecturer', 'Classroom', 'UniversityGroup'];
+    UniversityClassDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'UniversityClass', 'Week', 'Lecturer', 'Classroom', 'UniversityGroup'];
 
-    function UniversityClassDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, UniversityClass, Lecturer, Classroom, UniversityGroup) {
+    function UniversityClassDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, UniversityClass, Week, Lecturer, Classroom, UniversityGroup) {
         var vm = this;
 
         vm.universityClass = entity;
         vm.clear = clear;
         vm.save = save;
+        vm.weeks = Week.query();
         vm.lecturers = Lecturer.query();
         vm.classrooms = Classroom.query();
         vm.universitygroups = UniversityGroup.query();

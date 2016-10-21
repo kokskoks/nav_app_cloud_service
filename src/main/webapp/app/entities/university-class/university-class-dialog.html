@@ -63,6 +63,10 @@
         </div>
 
         <div class="form-group">
+            <label data-translate="navAppApp.universityClass.weeks" for="field_weeks">Weeks</label>
+            <select class="form-control" id="field_weeks" multiple name="weeks" ng-model="vm.universityClass.weeks" ng-options="week as week.id for week in vm.weeks track by week.id"></select>
+        </div>
+        <div class="form-group">
             <label data-translate="navAppApp.universityClass.lecturers" for="field_lecturers">Lecturers</label>
             <select class="form-control" id="field_lecturers" multiple name="lecturers" ng-model="vm.universityClass.lecturers" ng-options="lecturer as lecturer.id for lecturer in vm.lecturers track by lecturer.id"></select>
         </div>

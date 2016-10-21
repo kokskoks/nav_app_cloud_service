@@ -52,6 +52,17 @@
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
+        <createTable tableName="university_class_weeks">
+            <column name="weeks_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="university_classes_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="university_classes_id, weeks_id" tableName="university_class_weeks"/>
+        
         <createTable tableName="university_class_lecturers">
             <column name="lecturers_id" type="bigint">
                 <constraints nullable="false"/>

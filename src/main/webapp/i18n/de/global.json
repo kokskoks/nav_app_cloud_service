@@ -12,6 +12,7 @@
                 "lecturer": "Lecturer",
                 "universityClass": "University Class",
                 "classroom": "Classroom",
+                "week": "Week",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

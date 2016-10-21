@@ -24,9 +24,9 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/tes_web_app?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://localhost:3306/nav_app?useUnicode=true&characterEncoding=utf8&useSSL=false
         name:
-        username: test_developer
+        username: nav_app_dev
         password: 1234
         hikari:
             data-source-properties:

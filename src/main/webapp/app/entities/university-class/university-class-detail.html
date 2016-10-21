@@ -28,6 +28,12 @@
         <dd>
             <span data-translate="{{'navAppApp.Weekday.' + vm.universityClass.weekday}}">{{vm.universityClass.weekday}}</span>
         </dd>
+        <dt><span data-translate="navAppApp.universityClass.weeks">Weeks</span></dt>
+        <dd>
+            <span ng-repeat="weeks in vm.universityClass.weeks">
+                <a ui-sref="week-detail({id: weeks.id})">{{weeks.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
         <dt><span data-translate="navAppApp.universityClass.lecturers">Lecturers</span></dt>
         <dd>
             <span ng-repeat="lecturers in vm.universityClass.lecturers">

@@ -22,6 +22,7 @@
             "startHour": "Start Hour",
             "endHour": "End Hour",
             "weekday": "Weekday",
+            "weeks": "Weeks",
             "lecturers": "Lecturers",
             "classroom": "Classroom",
             "groups": "Groups"

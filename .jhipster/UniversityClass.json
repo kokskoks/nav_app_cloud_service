@@ -3,6 +3,14 @@
     "relationships": [
         {
             "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "weeks",
+            "otherEntityName": "week",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
             "otherEntityRelationshipName": "classes",
             "relationshipName": "lecturers",
             "otherEntityName": "lecturer",

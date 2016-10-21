@@ -2,9 +2,9 @@
 
 describe('Controller Tests', function() {
 
-    describe('UniversityClass Management Detail Controller', function() {
+    describe('Week Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockUniversityClass, MockWeek, MockLecturer, MockClassroom, MockUniversityGroup;
+        var MockEntity, MockPreviousState, MockWeek;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -12,11 +12,7 @@ describe('Controller Tests', function() {
             $scope = $rootScope.$new();
             MockEntity = jasmine.createSpy('MockEntity');
             MockPreviousState = jasmine.createSpy('MockPreviousState');
-            MockUniversityClass = jasmine.createSpy('MockUniversityClass');
             MockWeek = jasmine.createSpy('MockWeek');
-            MockLecturer = jasmine.createSpy('MockLecturer');
-            MockClassroom = jasmine.createSpy('MockClassroom');
-            MockUniversityGroup = jasmine.createSpy('MockUniversityGroup');
             
 
             var locals = {
@@ -24,21 +20,17 @@ describe('Controller Tests', function() {
                 '$rootScope': $rootScope,
                 'entity': MockEntity,
                 'previousState': MockPreviousState,
-                'UniversityClass': MockUniversityClass,
-                'Week': MockWeek,
-                'Lecturer': MockLecturer,
-                'Classroom': MockClassroom,
-                'UniversityGroup': MockUniversityGroup
+                'Week': MockWeek
             };
             createController = function() {
-                $injector.get('$controller')("UniversityClassDetailController", locals);
+                $injector.get('$controller')("WeekDetailController", locals);
             };
         }));
 
 
         describe('Root Scope Listening', function() {
             it('Unregisters root scope listener upon scope destruction', function() {
-                var eventType = 'navAppApp:universityClassUpdate';
+                var eventType = 'navAppApp:weekUpdate';
 
                 createController();
                 expect($rootScope.$$listenerCount[eventType]).toEqual(1);

@@ -25,6 +25,7 @@
                     <th><span data-translate="navAppApp.universityClass.startHour">Start Hour</span></th>
                     <th><span data-translate="navAppApp.universityClass.endHour">End Hour</span></th>
                     <th><span data-translate="navAppApp.universityClass.weekday">Weekday</span></th>
+                    <th><span data-translate="navAppApp.universityClass.weeks">Weeks</span></th>
                     <th><span data-translate="navAppApp.universityClass.lecturers">Lecturers</span></th>
                     <th><span data-translate="navAppApp.universityClass.classroom">Classroom</span></th>
                     <th></th>
@@ -39,6 +40,11 @@
                     <td>{{universityClass.startHour}}</td>
                     <td>{{universityClass.endHour}}</td>
                     <td data-translate="{{'navAppApp.Weekday.' + universityClass.weekday}}">{{universityClass.weekday}}</td>
+                    <td>
+                        <span ng-repeat="weeks in universityClass.weeks">
+                            <a class="form-control-static" ui-sref="week-detail({id: weeks.id})">{{weeks.id}}</a>{{$last ? '' : ', '}}
+                        </span>
+                    </td>
                     <td>
                         <span ng-repeat="lecturers in universityClass.lecturers">
                             <a class="form-control-static" ui-sref="lecturer-detail({id: lecturers.id})">{{lecturers.id}}</a>{{$last ? '' : ', '}}

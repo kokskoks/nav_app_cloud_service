@@ -50,6 +50,13 @@ public class UniversityClass implements Serializable {
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "university_class_weeks",
+               joinColumns = @JoinColumn(name="university_classes_id", referencedColumnName="ID"),
+               inverseJoinColumns = @JoinColumn(name="weeks_id", referencedColumnName="ID"))
+    private Set<Week> weeks = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "university_class_lecturers",
                joinColumns = @JoinColumn(name="university_classes_id", referencedColumnName="ID"),
                inverseJoinColumns = @JoinColumn(name="lecturers_id", referencedColumnName="ID"))
@@ -147,6 +154,29 @@ public class UniversityClass implements Serializable {
 
     public void setWeekday(Weekday weekday) {
         this.weekday = weekday;
+    }
+
+    public Set<Week> getWeeks() {
+        return weeks;
+    }
+
+    public UniversityClass weeks(Set<Week> weeks) {
+        this.weeks = weeks;
+        return this;
+    }
+
+    public UniversityClass addWeeks(Week week) {
+        weeks.add(week);
+        return this;
+    }
+
+    public UniversityClass removeWeeks(Week week) {
+        weeks.remove(week);
+        return this;
+    }
+
+    public void setWeeks(Set<Week> weeks) {
+        this.weeks = weeks;
     }
 
     public Set<Lecturer> getLecturers() {
