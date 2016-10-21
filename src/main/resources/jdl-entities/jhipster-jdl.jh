@@ -46,8 +46,8 @@ entity Lecturer {
 
 entity Week {
 	number Integer
-	startDate Date
-	endDate Date
+	startDate LocalDate
+	endDate LocalDate
 }
 
 relationship ManyToMany {
