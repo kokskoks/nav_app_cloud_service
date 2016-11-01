@@ -1,0 +1,22 @@
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<h2 data-translate="upload.title">Upload plan for a department</h2>
+		<br/>
+		<form>
+		  <div class="form-group">
+		  	<label>Choose department</label>
+		  	<br/>
+		  	<select ng-model="vm.selectedDept">
+		  		<option ng-repeat="dept in vm.depts">{{dept}}</option>
+		  	</select>
+		  </div>
+		  <div class="form-group">
+		    <label>Choose plan to upload</label>
+		    <br/>
+		    <div class="btn btn-default" ngf-select ng-model="vm.file" name="file" ngf-max-size="20MB" >Select a file</div>
+		    <p class="help-block">{{vm.file.name}}</p>
+		  </div>
+		  <button type="submit" class="btn btn-primary" ng-click="vm.submit()">Submit</button>
+		</form>
+	</div>
+</div>
