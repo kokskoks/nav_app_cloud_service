@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
 		<jhi-alert></jhi-alert>
-		<h2 data-translate="upload.title">Upload plan for a department</h2>
+		<h2 data-translate="upload.title">Upload plan for department</h2>
 		<br/>
 		<form>
 		  <div class="form-group">
@@ -17,7 +17,10 @@
 		    <div class="btn btn-default" ngf-select ng-model="vm.file" name="file" ngf-max-size="20MB" >Select a file</div>
 		    <p class="help-block">{{vm.file.name}}</p>
 		  </div>
-		  <button type="submit" class="btn btn-primary" ng-click="vm.submit()">Submit</button>
+		  <button ng-hide="vm.inProgress" type="submit" class="btn btn-primary" ng-click="vm.submit()">Submit</button>
+		  
+		  <uib-progressbar ng-show="vm.inProgress" max="vm.max" value="vm.progressPercentage"><span style="color:white; white-space:nowrap;">{{vm.progressPercentage}}%</span></uib-progressbar>
+		  
 		</form>
 	</div>
 </div>
