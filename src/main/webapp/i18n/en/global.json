@@ -1,5 +1,13 @@
 {
     "global": {
+    
+    	"alert" : {
+    		"upload" : {
+    			"error" : "Ooops, there was an error while uploading your file!",
+    			"success" : "Your file was uploaded and parsed successfully" 
+    		}
+    	},
+    	
         "title": "Nav_app",
         "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
