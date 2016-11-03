@@ -1,5 +1,6 @@
 entity UniversityClass {
 	name String
+	moduleCode String
     description String
     type ClassType
     startHour Integer
@@ -12,7 +13,7 @@ enum Weekday {
 }
 
 enum ClassType {
-	LECTURE, LABORATORY, EXERCISE, SPORT, LANGUAGE, SEMINARY, EXTRA
+	LECTURE, LABORATORY, EXERCISE, SPORT, LANGUAGE, SEMINARY, OTHER
 }
 
 entity Classroom {
@@ -27,6 +28,7 @@ entity Building {
     street String
     longitude Double
     latitude Double
+	photo ImageBlob
 }
 
 entity UniversityGroup {
