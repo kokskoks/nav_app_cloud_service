@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import pl.lodz.p.ind179640.service.PlanParserService;
+import pl.lodz.p.ind179640.service.parser.ParserNotFoundException;
 import pl.lodz.p.ind179640.service.parser.PlanParsersDispatcher;
 
 @RestController
@@ -31,9 +32,10 @@ public class PlanUploadEndpoint {
 	
 	
 	@RequestMapping(path="/upload/plan/{dept}",method=RequestMethod.POST)
-	public void uploadPlan(@RequestParam MultipartFile plan, @PathVariable String dept) throws IOException{
+	public void uploadPlan(@RequestParam MultipartFile plan, @PathVariable String dept) throws IOException, ParserNotFoundException{
 		log.debug("Plan file uploaded!");
 		byte[] bytes = plan.getBytes();
+		planParsersDispatcher.parse(bytes, dept);
 		
 	}
 
