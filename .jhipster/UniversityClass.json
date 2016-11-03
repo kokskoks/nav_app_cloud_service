@@ -37,13 +37,17 @@
             "fieldType": "String"
         },
         {
+            "fieldName": "moduleCode",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "description",
             "fieldType": "String"
         },
         {
             "fieldName": "type",
             "fieldType": "ClassType",
-            "fieldValues": "LECTURE,LABORATORY,EXERCISE,SPORT,LANGUAGE,SEMINARY,EXTRA"
+            "fieldValues": "LECTURE,LABORATORY,EXERCISE,SPORT,LANGUAGE,SEMINARY,OTHER"
         },
         {
             "fieldName": "startHour",

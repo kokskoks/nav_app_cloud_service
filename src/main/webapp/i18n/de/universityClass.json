@@ -3,15 +3,15 @@
         "universityClass" : {
             "home": {
                 "title": "University Classes",
-                "createLabel": "Create a new University Class",
-                "createOrEditLabel": "Create or edit a University Class",
-                "search": "Search for University Class"
+                "createLabel": "University Class erstellen",
+                "createOrEditLabel": "University Class erstellen oder bearbeiten",
+                "search": "Suche nach University Class"
             },
-            "created": "A new University Class is created with identifier {{ param }}",
-            "updated": "A University Class is updated with identifier {{ param }}",
-            "deleted": "A University Class is deleted with identifier {{ param }}",
+            "created": "University Class erstellt mit ID {{ param }}",
+            "updated": "University Class aktualisiert mit ID {{ param }}",
+            "deleted": "University Class gelöscht mit ID {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete University Class {{ id }}?"
+                "question": "Soll University Class {{ id }} wirklich dauerhaft gelöscht werden?"
             },
             "detail": {
                 "title": "University Class"

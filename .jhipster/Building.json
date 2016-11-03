@@ -28,6 +28,11 @@
         {
             "fieldName": "latitude",
             "fieldType": "Double"
+        },
+        {
+            "fieldName": "photo",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
         }
     ],
     "changelogDate": "20161020215200",

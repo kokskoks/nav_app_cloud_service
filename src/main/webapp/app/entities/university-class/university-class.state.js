@@ -109,6 +109,7 @@
                         entity: function () {
                             return {
                                 name: null,
+                                moduleCode: null,
                                 description: null,
                                 type: null,
                                 startHour: null,

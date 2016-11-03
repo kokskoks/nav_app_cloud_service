@@ -3,15 +3,15 @@
         "building" : {
             "home": {
                 "title": "Buildings",
-                "createLabel": "Create a new Building",
-                "createOrEditLabel": "Create or edit a Building",
-                "search": "Search for Building"
+                "createLabel": "Building erstellen",
+                "createOrEditLabel": "Building erstellen oder bearbeiten",
+                "search": "Suche nach Building"
             },
-            "created": "A new Building is created with identifier {{ param }}",
-            "updated": "A Building is updated with identifier {{ param }}",
-            "deleted": "A Building is deleted with identifier {{ param }}",
+            "created": "Building erstellt mit ID {{ param }}",
+            "updated": "Building aktualisiert mit ID {{ param }}",
+            "deleted": "Building gelöscht mit ID {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Building {{ id }}?"
+                "question": "Soll Building {{ id }} wirklich dauerhaft gelöscht werden?"
             },
             "detail": {
                 "title": "Building"

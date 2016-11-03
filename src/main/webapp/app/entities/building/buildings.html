@@ -24,6 +24,7 @@
                     <th><span data-translate="navAppApp.building.street">Street</span></th>
                     <th><span data-translate="navAppApp.building.longitude">Longitude</span></th>
                     <th><span data-translate="navAppApp.building.latitude">Latitude</span></th>
+                    <th><span data-translate="navAppApp.building.photo">Photo</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -35,6 +36,12 @@
                     <td>{{building.street}}</td>
                     <td>{{building.longitude}}</td>
                     <td>{{building.latitude}}</td>
+                    <td>
+                        <a ng-if="building.photo" ng-click="vm.openFile(building.photoContentType, building.photo)">
+                            <img data-ng-src="{{'data:' + building.photoContentType + ';base64,' + building.photo}}" style="max-height: 30px;"/>
+                        </a>
+                        <span ng-if="building.photo">{{building.photoContentType}}, {{vm.byteSize(building.photo)}}</span>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

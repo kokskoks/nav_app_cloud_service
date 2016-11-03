@@ -39,6 +39,13 @@ public class Building implements Serializable {
     @Column(name = "latitude")
     private Double latitude;
 
+    @Lob
+    @Column(name = "photo")
+    private byte[] photo;
+
+    @Column(name = "photo_content_type")
+    private String photoContentType;
+
     @OneToMany(mappedBy = "building")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -117,6 +124,32 @@ public class Building implements Serializable {
         this.latitude = latitude;
     }
 
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public Building photo(byte[] photo) {
+        this.photo = photo;
+        return this;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String getPhotoContentType() {
+        return photoContentType;
+    }
+
+    public Building photoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
+        return this;
+    }
+
+    public void setPhotoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
+    }
+
     public Set<Classroom> getRooms() {
         return rooms;
     }
@@ -171,6 +204,8 @@ public class Building implements Serializable {
             ", street='" + street + "'" +
             ", longitude='" + longitude + "'" +
             ", latitude='" + latitude + "'" +
+            ", photo='" + photo + "'" +
+            ", photoContentType='" + photoContentType + "'" +
             '}';
     }
 }

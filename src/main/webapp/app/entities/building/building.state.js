@@ -109,6 +109,8 @@
                                 street: null,
                                 longitude: null,
                                 latitude: null,
+                                photo: null,
+                                photoContentType: null,
                                 id: null
                             };
                         }

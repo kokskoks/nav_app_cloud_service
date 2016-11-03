@@ -44,6 +44,9 @@ public class UniversityClassResourceIntTest {
     private static final String DEFAULT_NAME = "AAAAA";
     private static final String UPDATED_NAME = "BBBBB";
 
+    private static final String DEFAULT_MODULE_CODE = "AAAAA";
+    private static final String UPDATED_MODULE_CODE = "BBBBB";
+
     private static final String DEFAULT_DESCRIPTION = "AAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBB";
 
@@ -97,6 +100,7 @@ public class UniversityClassResourceIntTest {
     public static UniversityClass createEntity(EntityManager em) {
         UniversityClass universityClass = new UniversityClass()
                 .name(DEFAULT_NAME)
+                .moduleCode(DEFAULT_MODULE_CODE)
                 .description(DEFAULT_DESCRIPTION)
                 .type(DEFAULT_TYPE)
                 .startHour(DEFAULT_START_HOUR)
@@ -127,6 +131,7 @@ public class UniversityClassResourceIntTest {
         assertThat(universityClasses).hasSize(databaseSizeBeforeCreate + 1);
         UniversityClass testUniversityClass = universityClasses.get(universityClasses.size() - 1);
         assertThat(testUniversityClass.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testUniversityClass.getModuleCode()).isEqualTo(DEFAULT_MODULE_CODE);
         assertThat(testUniversityClass.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testUniversityClass.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testUniversityClass.getStartHour()).isEqualTo(DEFAULT_START_HOUR);
@@ -146,6 +151,7 @@ public class UniversityClassResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(universityClass.getId().intValue())))
                 .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+                .andExpect(jsonPath("$.[*].moduleCode").value(hasItem(DEFAULT_MODULE_CODE.toString())))
                 .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
                 .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
                 .andExpect(jsonPath("$.[*].startHour").value(hasItem(DEFAULT_START_HOUR)))
@@ -165,6 +171,7 @@ public class UniversityClassResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(universityClass.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.moduleCode").value(DEFAULT_MODULE_CODE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
             .andExpect(jsonPath("$.startHour").value(DEFAULT_START_HOUR))
@@ -192,6 +199,7 @@ public class UniversityClassResourceIntTest {
         UniversityClass updatedUniversityClass = universityClassRepository.findOne(universityClass.getId());
         updatedUniversityClass
                 .name(UPDATED_NAME)
+                .moduleCode(UPDATED_MODULE_CODE)
                 .description(UPDATED_DESCRIPTION)
                 .type(UPDATED_TYPE)
                 .startHour(UPDATED_START_HOUR)
@@ -208,6 +216,7 @@ public class UniversityClassResourceIntTest {
         assertThat(universityClasses).hasSize(databaseSizeBeforeUpdate);
         UniversityClass testUniversityClass = universityClasses.get(universityClasses.size() - 1);
         assertThat(testUniversityClass.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testUniversityClass.getModuleCode()).isEqualTo(UPDATED_MODULE_CODE);
         assertThat(testUniversityClass.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testUniversityClass.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testUniversityClass.getStartHour()).isEqualTo(UPDATED_START_HOUR);

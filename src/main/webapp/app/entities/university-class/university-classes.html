@@ -20,6 +20,7 @@
                 <tr>
                     <th><span data-translate="global.field.id">ID</span></th>
                     <th><span data-translate="navAppApp.universityClass.name">Name</span></th>
+                    <th><span data-translate="navAppApp.universityClass.moduleCode">Module Code</span></th>
                     <th><span data-translate="navAppApp.universityClass.description">Description</span></th>
                     <th><span data-translate="navAppApp.universityClass.type">Type</span></th>
                     <th><span data-translate="navAppApp.universityClass.startHour">Start Hour</span></th>
@@ -35,6 +36,7 @@
                 <tr ng-repeat="universityClass in vm.universityClasses track by universityClass.id">
                     <td><a ui-sref="university-class-detail({id:universityClass.id})">{{universityClass.id}}</a></td>
                     <td>{{universityClass.name}}</td>
+                    <td>{{universityClass.moduleCode}}</td>
                     <td>{{universityClass.description}}</td>
                     <td data-translate="{{'navAppApp.ClassType.' + universityClass.type}}">{{universityClass.type}}</td>
                     <td>{{universityClass.startHour}}</td>

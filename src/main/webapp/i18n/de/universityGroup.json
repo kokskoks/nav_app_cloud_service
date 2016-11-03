@@ -1,0 +1,26 @@
+{
+    "navAppApp": {
+        "universityGroup" : {
+            "home": {
+                "title": "University Groups",
+                "createLabel": "University Group erstellen",
+                "createOrEditLabel": "University Group erstellen oder bearbeiten",
+                "search": "Suche nach University Group"
+            },
+            "created": "University Group erstellt mit ID {{ param }}",
+            "updated": "University Group aktualisiert mit ID {{ param }}",
+            "deleted": "University Group gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll University Group {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "University Group"
+            },
+            "name": "Name",
+            "description": "Description",
+            "semester": "Semester",
+            "specialisation": "Specialisation",
+            "classes": "Classes"
+        }
+    }
+}

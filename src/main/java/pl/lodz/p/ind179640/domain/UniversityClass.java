@@ -31,6 +31,9 @@ public class UniversityClass implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "module_code")
+    private String moduleCode;
+
     @Column(name = "description")
     private String description;
 
@@ -89,6 +92,19 @@ public class UniversityClass implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getModuleCode() {
+        return moduleCode;
+    }
+
+    public UniversityClass moduleCode(String moduleCode) {
+        this.moduleCode = moduleCode;
+        return this;
+    }
+
+    public void setModuleCode(String moduleCode) {
+        this.moduleCode = moduleCode;
     }
 
     public String getDescription() {
@@ -267,6 +283,7 @@ public class UniversityClass implements Serializable {
         return "UniversityClass{" +
             "id=" + id +
             ", name='" + name + "'" +
+            ", moduleCode='" + moduleCode + "'" +
             ", description='" + description + "'" +
             ", type='" + type + "'" +
             ", startHour='" + startHour + "'" +

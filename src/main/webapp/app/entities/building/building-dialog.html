@@ -43,6 +43,28 @@
                     ng-model="vm.building.latitude"
                      />
         </div>
+        <div class="form-group" ngf-drop ngf-change="vm.setPhoto($file, vm.building)" ngf-pattern="'image/*'">
+            <label class="control-label" data-translate="navAppApp.building.photo" for="field_photo">Photo</label>
+            <div>
+                <img data-ng-src="{{'data:' + vm.building.photoContentType + ';base64,' + vm.building.photo}}" style="max-height: 100px;" ng-if="vm.building.photo"/>
+                <div ng-if="vm.building.photo" class="help-block clearfix">
+                    <span class="pull-left">{{vm.building.photoContentType}}, {{vm.byteSize(vm.building.photo)}}</span>
+                    <button type="button" ng-click="vm.building.photo=null;vm.building.photoContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="button" ngf-select class="btn btn-default btn-block"
+                        ngf-change="vm.setPhoto($file, vm.building)" accept="image/*" data-translate="entity.action.addimage">
+                    Add image
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="photo" id="field_photo"
+                    ng-model="vm.building.photo"
+                     />
+            <input type="hidden" class="form-control" name="photoContentType" id="field_photoContentType"
+                    ng-model="vm.building.photoContentType" />
+        </div>
 
     </div>
     <div class="modal-footer">

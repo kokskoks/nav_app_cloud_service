@@ -1,0 +1,26 @@
+{
+    "navAppApp": {
+        "classroom" : {
+            "home": {
+                "title": "Classrooms",
+                "createLabel": "Classroom erstellen",
+                "createOrEditLabel": "Classroom erstellen oder bearbeiten",
+                "search": "Suche nach Classroom"
+            },
+            "created": "Classroom erstellt mit ID {{ param }}",
+            "updated": "Classroom aktualisiert mit ID {{ param }}",
+            "deleted": "Classroom gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Classroom {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Classroom"
+            },
+            "name": "Name",
+            "desription": "Desription",
+            "floor": "Floor",
+            "classes": "Classes",
+            "building": "Building"
+        }
+    }
+}
