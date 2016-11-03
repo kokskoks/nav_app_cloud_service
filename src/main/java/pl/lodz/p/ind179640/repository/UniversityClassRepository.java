@@ -18,5 +18,6 @@ public interface UniversityClassRepository extends JpaRepository<UniversityClass
 
     @Query("select universityClass from UniversityClass universityClass left join fetch universityClass.weeks left join fetch universityClass.lecturers where universityClass.id =:id")
     UniversityClass findOneWithEagerRelationships(@Param("id") Long id);
+    
 
 }
