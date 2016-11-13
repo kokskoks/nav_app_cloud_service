@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
@@ -30,6 +32,7 @@ import pl.lodz.p.ind179640.service.parser.Parser;
 @Transactional
 public class WeeiaParser implements Parser {
 
+	private static final Logger log = LoggerFactory.getLogger(WeeiaParser.class);
 
 	private static final String COLUMN_DELIMETER = ";";
 	
@@ -37,15 +40,16 @@ public class WeeiaParser implements Parser {
 	private static final int SUBJECT = 0;
 	private static final int SEMESTER = 1;
 	private static final int GROUP = 2;
-	private static final int MODULE = 3;
-	private static final int MODULE_TYPE = 4;
-	private static final int BUILDING = 5;
-	private static final int ROOM = 6;
-	private static final int DAY = 7;
-	private static final int START_TIME = 8;
-	private static final int END_TIME = 9;
-	private static final int LECTURER_NAME = 10;
-	private static final int WEEKS = 11;
+	private static final int MODULE_CODE = 3;
+	private static final int MODULE = 4;
+	private static final int MODULE_TYPE = 5;
+	private static final int BUILDING = 6;
+	private static final int ROOM = 7;
+	private static final int DAY = 8;
+	private static final int START_TIME = 9;
+	private static final int END_TIME = 10;
+	private static final int LECTURER_NAME = 11;
+	private static final int WEEKS = 12;
 
 
 	private static final String HOURS_DELIMETER = "-";
@@ -111,8 +115,9 @@ public class WeeiaParser implements Parser {
 		String weeks = columnValues[WEEKS];
 		String uniGroup = columnValues[GROUP];
 		String buildingCode = columnValues[BUILDING];
+		String moduleCode = columnValues[MODULE_CODE];
 		
-		UniversityClass uniClass = parseUniversityClass(subject, moduleType, startHour, endHour, day);
+		UniversityClass uniClass = parseUniversityClass(moduleCode, module, moduleType, startHour, endHour, day);
 		
 
 		
@@ -138,7 +143,7 @@ public class WeeiaParser implements Parser {
 		}
 		
 		if(uniGroup != null && !uniGroup.isEmpty()){
-			UniversityGroup universityGroup = parseUniGroup(uniGroup);
+			UniversityGroup universityGroup = parseUniGroup(uniGroup, subject, semester);
 			uniClass.addGroups(universityGroup);
 		}
 		
@@ -147,7 +152,7 @@ public class WeeiaParser implements Parser {
 
 	private Building parseBuilding(String buildingCode) {
 		Building building = new Building();
-		building.setName(buildingCode);
+		building.setCode(buildingCode);
 		
 		Example<Building> buildingExample = Example.of(building);
 		Building buldingResult = buildingRepo.findOne(buildingExample);
@@ -163,6 +168,7 @@ public class WeeiaParser implements Parser {
 	}
 
 	private Lecturer parseLecturer(String lecturerName) {
+		lecturerName = lecturerName.trim();
 		int separationIndex = lecturerName.lastIndexOf(" ");
 		
 		String surname = null;
@@ -247,7 +253,7 @@ public class WeeiaParser implements Parser {
 		
 	}
 
-	private UniversityGroup parseUniGroup(String uniGroup) {
+	private UniversityGroup parseUniGroup(String uniGroup, String subject, String semester) {
 		UniversityGroup universityGroup = new UniversityGroup();
 		universityGroup.setCode(uniGroup);
 		
@@ -257,6 +263,18 @@ public class WeeiaParser implements Parser {
 		if(universityGroupResult != null){
 			universityGroup = universityGroupResult;
 		} else {
+			
+			Integer semesterInt = null;
+			
+			try {
+				Integer.valueOf(semester);
+			} catch(NumberFormatException nfe){
+				log.error("could not parse semester value", nfe);
+			}
+			
+			universityGroup.setSemester(semesterInt);
+			universityGroup.setSubject(subject);
+			
 			universityGroup = universityGroupRepo.save(universityGroup);
 		}
 		
@@ -280,15 +298,17 @@ public class WeeiaParser implements Parser {
 		return classroom;
 	}
 
-	private UniversityClass parseUniversityClass(String subject, String moduleType, String startHour, String endHour, String day) {
+	private UniversityClass parseUniversityClass(String moduleCode, String module, String moduleType, String startHour, String endHour, String day) {
 		
 		UniversityClass uniClass = new UniversityClass();
-		uniClass.setName(subject);
+		uniClass.setModuleCode(moduleCode);
 		
 		Example<UniversityClass> uniClassExample = Example.of(uniClass);
 		UniversityClass universityClass = universityClassRepo.findOne(uniClassExample);
 		
 		if(universityClass == null) {
+			
+			uniClass.setName(module);
 			
 			if(startHour != null && endHour != null){
 				
