@@ -16,17 +16,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import pl.lodz.p.ind179640.service.PlanParserService;
 import pl.lodz.p.ind179640.service.parser.ParserNotFoundException;
-import pl.lodz.p.ind179640.service.parser.PlanParsersDispatcher;
+import pl.lodz.p.ind179640.service.parser.ParsersDispatcher;
 
 @RestController
-public class PlanUploadEndpoint {
+public class UploadEndpoint {
 	
-	 private final Logger log = LoggerFactory.getLogger(PlanUploadEndpoint.class);
+	 private final Logger log = LoggerFactory.getLogger(UploadEndpoint.class);
 	
-	private final PlanParsersDispatcher planParsersDispatcher;
+	private final ParsersDispatcher planParsersDispatcher;
 	
 	@Autowired
-	public PlanUploadEndpoint(PlanParsersDispatcher planParsersDispatcher) {
+	public UploadEndpoint(ParsersDispatcher planParsersDispatcher) {
 		this.planParsersDispatcher = planParsersDispatcher;
 	}
 	
@@ -38,6 +38,8 @@ public class PlanUploadEndpoint {
 		planParsersDispatcher.parse(bytes, dept);
 		
 	}
+	
+
 	
 	
 

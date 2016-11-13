@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PlanParsersDispatcherImpl implements PlanParsersDispatcher{
+public class ParsersDispatcherImpl implements ParsersDispatcher{
 	
 	private final ApplicationContext appContext;
 	private final Map<String, Parser> parsersMap;
@@ -15,7 +15,7 @@ public class PlanParsersDispatcherImpl implements PlanParsersDispatcher{
 	
 	
 	@Autowired
-	public PlanParsersDispatcherImpl(ApplicationContext appContext) {
+	public ParsersDispatcherImpl(ApplicationContext appContext) {
 		this.appContext = appContext;
 		
 		parsersMap = appContext.getBeansOfType(Parser.class);
