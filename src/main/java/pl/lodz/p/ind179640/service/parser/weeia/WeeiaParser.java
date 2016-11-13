@@ -10,6 +10,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import pl.lodz.p.ind179640.domain.Building;
 import pl.lodz.p.ind179640.domain.Classroom;
 import pl.lodz.p.ind179640.domain.Lecturer;
 import pl.lodz.p.ind179640.domain.UniversityClass;
@@ -29,32 +30,31 @@ import pl.lodz.p.ind179640.service.parser.Parser;
 @Transactional
 public class WeeiaParser implements Parser {
 
-	private static final int START_HOUR_INDEX = 0;
+
+	private static final String COLUMN_DELIMETER = ";";
+	
+
+	private static final int SUBJECT = 0;
+	private static final int SEMESTER = 1;
+	private static final int GROUP = 2;
+	private static final int MODULE = 3;
+	private static final int MODULE_TYPE = 4;
+	private static final int BUILDING = 5;
+	private static final int ROOM = 6;
+	private static final int DAY = 7;
+	private static final int START_TIME = 8;
+	private static final int END_TIME = 9;
+	private static final int LECTURER_NAME = 10;
+	private static final int WEEKS = 11;
+
 
 	private static final String HOURS_DELIMETER = "-";
 
-	private static final String COLUMN_DELIMETER = "\t";
-	
-	private static final int END_HOUR_INDEX = 1;
 
-	private static final int DAY = 1;
-	private static final int TIME = 2;
-	private static final int WEEKS = 3;
-	private static final int EVENT_CAT = 4;
-	private static final int WEIGHTNING = 5;
-	private static final int MODULE = 6;
-	private static final int MOD_CODE = 7;
-	private static final int ROOM = 8;
-	private static final int SURNAME = 9;
-	private static final int FORENAME = 10;
-	private static final int STAFF_CODE = 11;
-	private static final int GROUP = 12;
-	private static final int STUDENT = 13;
-	private static final int STUD_CODE = 14;
-	private static final int PROTECTED = 15;
-	private static final int GLOBAL = 16;
-	private static final int DESCRIPTION = 17;
-	private static final int DATE_CHANGED = 18;
+	private static final int START_HOUR_INDEX = 0;
+
+
+	private static final int END_HOUR_INDEX = 1;
 
 	
 	private final UniversityClassRepository universityClassRepo;
@@ -82,14 +82,15 @@ public class WeeiaParser implements Parser {
 	@Override
 	public void parse(byte[] planBytes) {
 		
-		Scanner planScanner = new Scanner(new ByteArrayInputStream(planBytes));
+		try(Scanner planScanner = new Scanner(new ByteArrayInputStream(planBytes))){
 		
-		//ommit header line
-		planScanner.nextLine();
-		
-		while(planScanner.hasNextLine()){
-			String line = planScanner.nextLine();
-			parseLine(line);
+			//ommit header line
+			planScanner.nextLine();
+			
+			while(planScanner.hasNextLine()){
+				String line = planScanner.nextLine();
+				parseLine(line);
+			}
 		}
 		
 		
@@ -98,21 +99,32 @@ public class WeeiaParser implements Parser {
 	protected void parseLine(String line) {
 		String[] columnValues = line.split(COLUMN_DELIMETER);
 		
-		String moduleCode = columnValues[MOD_CODE];
-		String moduleName = columnValues[MODULE];
-		String hours = columnValues[TIME];
+		String subject = columnValues[SUBJECT];
+		String semester = columnValues[SEMESTER];
+		String startHour = columnValues[START_TIME];
+		String endHour = columnValues[END_TIME];
 		String day = columnValues[DAY];
-		String classType = columnValues[EVENT_CAT];
-		String classroomName = columnValues[ROOM];
-		String lecturerName = columnValues[SURNAME];
+		String module = columnValues[MODULE];
+		String moduleType = columnValues[MODULE_TYPE];
+		String classroomCode = columnValues[ROOM];
+		String lecturerName = columnValues[LECTURER_NAME];
 		String weeks = columnValues[WEEKS];
 		String uniGroup = columnValues[GROUP];
+		String buildingCode = columnValues[BUILDING];
 		
-		UniversityClass uniClass = parseUniversityClass(moduleCode, moduleName, hours, day, classType);
+		UniversityClass uniClass = parseUniversityClass(subject, moduleType, startHour, endHour, day);
 		
-		if(classroomName != null && !classroomName.isEmpty()){
-			Classroom classroom = parseClassRoom(classroomName);
+
+		
+		if(classroomCode != null && !classroomCode.isEmpty()){
+			Classroom classroom = parseClassRoom(classroomCode);
 			uniClass.setClassroom(classroom);
+		}
+		
+		if(buildingCode != null && !buildingCode.isEmpty()){
+			Building building = parseBuilding(buildingCode);
+			uniClass.getClassroom().setBuilding(building);
+			building.addRooms(uniClass.getClassroom());
 		}
 		
 		if(lecturerName != null && !lecturerName.isEmpty()){
@@ -131,6 +143,23 @@ public class WeeiaParser implements Parser {
 		}
 		
 		
+	}
+
+	private Building parseBuilding(String buildingCode) {
+		Building building = new Building();
+		building.setName(buildingCode);
+		
+		Example<Building> buildingExample = Example.of(building);
+		Building buldingResult = buildingRepo.findOne(buildingExample);
+		
+		if(buldingResult != null){
+			building = buldingResult;
+		} else {
+			building = buildingRepo.save(building);
+		}
+		
+		return building;
+
 	}
 
 	private Lecturer parseLecturer(String lecturerName) {
@@ -251,25 +280,25 @@ public class WeeiaParser implements Parser {
 		return classroom;
 	}
 
-	private UniversityClass parseUniversityClass(String moduleCode, String moduleName, String hours, String day, String classType) {
+	private UniversityClass parseUniversityClass(String subject, String moduleType, String startHour, String endHour, String day) {
 		
 		UniversityClass uniClass = new UniversityClass();
-		uniClass.setModuleCode(moduleCode);
+		uniClass.setName(subject);
 		
 		Example<UniversityClass> uniClassExample = Example.of(uniClass);
 		UniversityClass universityClass = universityClassRepo.findOne(uniClassExample);
 		
 		if(universityClass == null) {
-			uniClass.setName(moduleName);
 			
-			if(hours != null){
-				parseTime(uniClass, hours);
+			if(startHour != null && endHour != null){
+				
+				parseTime(uniClass, startHour + HOURS_DELIMETER + endHour );
 			}
 			if(day != null){
 				parseDay(uniClass, day);
 			}
-			if(classType != null){
-				parseClassType(uniClass, classType);
+			if(moduleType != null){
+				parseClassType(uniClass, moduleType);
 			}
 			
 			uniClass = universityClassRepo.save(uniClass);
@@ -284,22 +313,22 @@ public class WeeiaParser implements Parser {
 
 	private void parseClassType(UniversityClass uniClass, String classType) {
 		switch(classType.toLowerCase()){
-		case "l":
+		case "laboratorium":
 			uniClass.setType(ClassType.LABORATORY);
 			break;
-		case "w":
+		case "wyk³ad":
 			uniClass.setType(ClassType.LECTURE);
 			break;
-		case "sem":
+		case "seminarium":
 			uniClass.setType(ClassType.SEMINARY);
 			break;
-		case "c":
+		case "æwiczenia":
 			uniClass.setType(ClassType.EXERCISE);
 			break;
 		case "sport":
 			uniClass.setType(ClassType.SPORT);
 			break;
-		case "lekt":
+		case "lektorat":
 			uniClass.setType(ClassType.LANGUAGE);
 			break;
 		default:
@@ -310,19 +339,19 @@ public class WeeiaParser implements Parser {
 
 	private void parseDay(UniversityClass uniClass, String day) {
 		switch(day.toLowerCase()){
-		case "pn":
+		case "poniedzia³ek":
 			uniClass.setWeekday(Weekday.MONDAY);
 			break;
-		case "wt":
+		case "wtorek":
 			uniClass.setWeekday(Weekday.TUESDAY);
 			break;
-		case "œr":
+		case "œroda":
 			uniClass.setWeekday(Weekday.WEDNESDAY);
 			break;
-		case "czw":
+		case "czwartek":
 			uniClass.setWeekday(Weekday.THURSDAY);
 			break;
-		case "pt":
+		case "pi¹tek":
 			uniClass.setWeekday(Weekday.FRIDAY);
 			break;
 		}
