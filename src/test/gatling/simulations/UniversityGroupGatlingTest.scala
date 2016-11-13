@@ -67,7 +67,7 @@ class UniversityGroupGatlingTest extends Simulation {
             .exec(http("Create new universityGroup")
             .post("/api/university-groups")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "description":"SAMPLE_TEXT", "semester":"0", "specialisation":null}""")).asJSON
+            .body(StringBody("""{"id":null, "subject":"SAMPLE_TEXT", "code":"SAMPLE_TEXT", "description":"SAMPLE_TEXT", "semester":"0", "specialisation":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_universityGroup_url"))).exitHereIfFailed
             .pause(10)

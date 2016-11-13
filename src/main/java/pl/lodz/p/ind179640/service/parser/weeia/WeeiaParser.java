@@ -249,7 +249,7 @@ public class WeeiaParser implements Parser {
 
 	private UniversityGroup parseUniGroup(String uniGroup) {
 		UniversityGroup universityGroup = new UniversityGroup();
-		universityGroup.setName(uniGroup);
+		universityGroup.setCode(uniGroup);
 		
 		Example<UniversityGroup> universityGroupExample = Example.of(universityGroup);
 		UniversityGroup universityGroupResult = universityGroupRepo.findOne(universityGroupExample);

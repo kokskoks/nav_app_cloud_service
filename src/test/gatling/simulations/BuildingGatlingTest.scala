@@ -67,7 +67,7 @@ class BuildingGatlingTest extends Simulation {
             .exec(http("Create new building")
             .post("/api/buildings")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "description":"SAMPLE_TEXT", "street":"SAMPLE_TEXT", "longitude":null, "latitude":null, "photo":null}""")).asJSON
+            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "code":"SAMPLE_TEXT", "description":"SAMPLE_TEXT", "street":"SAMPLE_TEXT", "longitude":null, "latitude":null, "photo":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_building_url"))).exitHereIfFailed
             .pause(10)

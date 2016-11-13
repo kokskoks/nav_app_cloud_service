@@ -27,6 +27,9 @@ public class Building implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "code")
+    private String code;
+
     @Column(name = "description")
     private String description;
 
@@ -70,6 +73,19 @@ public class Building implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public Building code(String code) {
+        this.code = code;
+        return this;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getDescription() {
@@ -200,6 +216,7 @@ public class Building implements Serializable {
         return "Building{" +
             "id=" + id +
             ", name='" + name + "'" +
+            ", code='" + code + "'" +
             ", description='" + description + "'" +
             ", street='" + street + "'" +
             ", longitude='" + longitude + "'" +

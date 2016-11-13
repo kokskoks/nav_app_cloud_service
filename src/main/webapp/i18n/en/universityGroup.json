@@ -16,7 +16,8 @@
             "detail": {
                 "title": "University Group"
             },
-            "name": "Name",
+            "subject": "Subject",
+            "code": "Code",
             "description": "Description",
             "semester": "Semester",
             "specialisation": "Specialisation",

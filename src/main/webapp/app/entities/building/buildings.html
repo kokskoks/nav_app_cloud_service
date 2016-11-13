@@ -20,6 +20,7 @@
                 <tr>
                     <th><span data-translate="global.field.id">ID</span></th>
                     <th><span data-translate="navAppApp.building.name">Name</span></th>
+                    <th><span data-translate="navAppApp.building.code">Code</span></th>
                     <th><span data-translate="navAppApp.building.description">Description</span></th>
                     <th><span data-translate="navAppApp.building.street">Street</span></th>
                     <th><span data-translate="navAppApp.building.longitude">Longitude</span></th>
@@ -32,6 +33,7 @@
                 <tr ng-repeat="building in vm.buildings track by building.id">
                     <td><a ui-sref="building-detail({id:building.id})">{{building.id}}</a></td>
                     <td>{{building.name}}</td>
+                    <td>{{building.code}}</td>
                     <td>{{building.description}}</td>
                     <td>{{building.street}}</td>
                     <td>{{building.longitude}}</td>

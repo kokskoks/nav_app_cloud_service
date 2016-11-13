@@ -39,8 +39,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = NavAppApp.class)
 public class UniversityGroupResourceIntTest {
 
-    private static final String DEFAULT_NAME = "AAAAA";
-    private static final String UPDATED_NAME = "BBBBB";
+    private static final String DEFAULT_SUBJECT = "AAAAA";
+    private static final String UPDATED_SUBJECT = "BBBBB";
+
+    private static final String DEFAULT_CODE = "AAAAA";
+    private static final String UPDATED_CODE = "BBBBB";
 
     private static final String DEFAULT_DESCRIPTION = "AAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBB";
@@ -88,7 +91,8 @@ public class UniversityGroupResourceIntTest {
      */
     public static UniversityGroup createEntity(EntityManager em) {
         UniversityGroup universityGroup = new UniversityGroup()
-                .name(DEFAULT_NAME)
+                .subject(DEFAULT_SUBJECT)
+                .code(DEFAULT_CODE)
                 .description(DEFAULT_DESCRIPTION)
                 .semester(DEFAULT_SEMESTER)
                 .specialisation(DEFAULT_SPECIALISATION);
@@ -116,7 +120,8 @@ public class UniversityGroupResourceIntTest {
         List<UniversityGroup> universityGroups = universityGroupRepository.findAll();
         assertThat(universityGroups).hasSize(databaseSizeBeforeCreate + 1);
         UniversityGroup testUniversityGroup = universityGroups.get(universityGroups.size() - 1);
-        assertThat(testUniversityGroup.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testUniversityGroup.getSubject()).isEqualTo(DEFAULT_SUBJECT);
+        assertThat(testUniversityGroup.getCode()).isEqualTo(DEFAULT_CODE);
         assertThat(testUniversityGroup.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testUniversityGroup.getSemester()).isEqualTo(DEFAULT_SEMESTER);
         assertThat(testUniversityGroup.isSpecialisation()).isEqualTo(DEFAULT_SPECIALISATION);
@@ -133,7 +138,8 @@ public class UniversityGroupResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(universityGroup.getId().intValue())))
-                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+                .andExpect(jsonPath("$.[*].subject").value(hasItem(DEFAULT_SUBJECT.toString())))
+                .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())))
                 .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
                 .andExpect(jsonPath("$.[*].semester").value(hasItem(DEFAULT_SEMESTER)))
                 .andExpect(jsonPath("$.[*].specialisation").value(hasItem(DEFAULT_SPECIALISATION.booleanValue())));
@@ -150,7 +156,8 @@ public class UniversityGroupResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(universityGroup.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.subject").value(DEFAULT_SUBJECT.toString()))
+            .andExpect(jsonPath("$.code").value(DEFAULT_CODE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.semester").value(DEFAULT_SEMESTER))
             .andExpect(jsonPath("$.specialisation").value(DEFAULT_SPECIALISATION.booleanValue()));
@@ -175,7 +182,8 @@ public class UniversityGroupResourceIntTest {
         // Update the universityGroup
         UniversityGroup updatedUniversityGroup = universityGroupRepository.findOne(universityGroup.getId());
         updatedUniversityGroup
-                .name(UPDATED_NAME)
+                .subject(UPDATED_SUBJECT)
+                .code(UPDATED_CODE)
                 .description(UPDATED_DESCRIPTION)
                 .semester(UPDATED_SEMESTER)
                 .specialisation(UPDATED_SPECIALISATION);
@@ -189,7 +197,8 @@ public class UniversityGroupResourceIntTest {
         List<UniversityGroup> universityGroups = universityGroupRepository.findAll();
         assertThat(universityGroups).hasSize(databaseSizeBeforeUpdate);
         UniversityGroup testUniversityGroup = universityGroups.get(universityGroups.size() - 1);
-        assertThat(testUniversityGroup.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testUniversityGroup.getSubject()).isEqualTo(UPDATED_SUBJECT);
+        assertThat(testUniversityGroup.getCode()).isEqualTo(UPDATED_CODE);
         assertThat(testUniversityGroup.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testUniversityGroup.getSemester()).isEqualTo(UPDATED_SEMESTER);
         assertThat(testUniversityGroup.isSpecialisation()).isEqualTo(UPDATED_SPECIALISATION);

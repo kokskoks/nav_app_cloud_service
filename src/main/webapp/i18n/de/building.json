@@ -17,6 +17,7 @@
                 "title": "Building"
             },
             "name": "Name",
+            "code": "Code",
             "description": "Description",
             "street": "Street",
             "longitude": "Longitude",

@@ -43,6 +43,9 @@ public class BuildingResourceIntTest {
     private static final String DEFAULT_NAME = "AAAAA";
     private static final String UPDATED_NAME = "BBBBB";
 
+    private static final String DEFAULT_CODE = "AAAAA";
+    private static final String UPDATED_CODE = "BBBBB";
+
     private static final String DEFAULT_DESCRIPTION = "AAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBB";
 
@@ -98,6 +101,7 @@ public class BuildingResourceIntTest {
     public static Building createEntity(EntityManager em) {
         Building building = new Building()
                 .name(DEFAULT_NAME)
+                .code(DEFAULT_CODE)
                 .description(DEFAULT_DESCRIPTION)
                 .street(DEFAULT_STREET)
                 .longitude(DEFAULT_LONGITUDE)
@@ -129,6 +133,7 @@ public class BuildingResourceIntTest {
         assertThat(buildings).hasSize(databaseSizeBeforeCreate + 1);
         Building testBuilding = buildings.get(buildings.size() - 1);
         assertThat(testBuilding.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testBuilding.getCode()).isEqualTo(DEFAULT_CODE);
         assertThat(testBuilding.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testBuilding.getStreet()).isEqualTo(DEFAULT_STREET);
         assertThat(testBuilding.getLongitude()).isEqualTo(DEFAULT_LONGITUDE);
@@ -149,6 +154,7 @@ public class BuildingResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(building.getId().intValue())))
                 .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+                .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())))
                 .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
                 .andExpect(jsonPath("$.[*].street").value(hasItem(DEFAULT_STREET.toString())))
                 .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.doubleValue())))
@@ -169,6 +175,7 @@ public class BuildingResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(building.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.code").value(DEFAULT_CODE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.street").value(DEFAULT_STREET.toString()))
             .andExpect(jsonPath("$.longitude").value(DEFAULT_LONGITUDE.doubleValue()))
@@ -197,6 +204,7 @@ public class BuildingResourceIntTest {
         Building updatedBuilding = buildingRepository.findOne(building.getId());
         updatedBuilding
                 .name(UPDATED_NAME)
+                .code(UPDATED_CODE)
                 .description(UPDATED_DESCRIPTION)
                 .street(UPDATED_STREET)
                 .longitude(UPDATED_LONGITUDE)
@@ -214,6 +222,7 @@ public class BuildingResourceIntTest {
         assertThat(buildings).hasSize(databaseSizeBeforeUpdate);
         Building testBuilding = buildings.get(buildings.size() - 1);
         assertThat(testBuilding.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testBuilding.getCode()).isEqualTo(UPDATED_CODE);
         assertThat(testBuilding.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testBuilding.getStreet()).isEqualTo(UPDATED_STREET);
         assertThat(testBuilding.getLongitude()).isEqualTo(UPDATED_LONGITUDE);

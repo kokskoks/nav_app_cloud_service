@@ -12,7 +12,11 @@
     ],
     "fields": [
         {
-            "fieldName": "name",
+            "fieldName": "subject",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
             "fieldType": "String"
         },
         {

@@ -19,7 +19,8 @@
             <thead>
                 <tr>
                     <th><span data-translate="global.field.id">ID</span></th>
-                    <th><span data-translate="navAppApp.universityGroup.name">Name</span></th>
+                    <th><span data-translate="navAppApp.universityGroup.subject">Subject</span></th>
+                    <th><span data-translate="navAppApp.universityGroup.code">Code</span></th>
                     <th><span data-translate="navAppApp.universityGroup.description">Description</span></th>
                     <th><span data-translate="navAppApp.universityGroup.semester">Semester</span></th>
                     <th><span data-translate="navAppApp.universityGroup.specialisation">Specialisation</span></th>
@@ -30,7 +31,8 @@
             <tbody>
                 <tr ng-repeat="universityGroup in vm.universityGroups track by universityGroup.id">
                     <td><a ui-sref="university-group-detail({id:universityGroup.id})">{{universityGroup.id}}</a></td>
-                    <td>{{universityGroup.name}}</td>
+                    <td>{{universityGroup.subject}}</td>
+                    <td>{{universityGroup.code}}</td>
                     <td>{{universityGroup.description}}</td>
                     <td>{{universityGroup.semester}}</td>
                     <td>{{universityGroup.specialisation}}</td>

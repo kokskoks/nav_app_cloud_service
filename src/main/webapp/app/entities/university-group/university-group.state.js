@@ -104,7 +104,8 @@
                     resolve: {
                         entity: function () {
                             return {
-                                name: null,
+                                subject: null,
+                                code: null,
                                 description: null,
                                 semester: null,
                                 specialisation: null,

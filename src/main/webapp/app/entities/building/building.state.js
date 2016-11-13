@@ -105,6 +105,7 @@
                         entity: function () {
                             return {
                                 name: null,
+                                code: null,
                                 description: null,
                                 street: null,
                                 longitude: null,

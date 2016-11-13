@@ -21,7 +21,11 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="varchar(255)">
+            <column name="subject" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="code" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             

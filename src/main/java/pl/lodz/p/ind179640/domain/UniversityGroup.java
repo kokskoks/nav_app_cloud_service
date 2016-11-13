@@ -23,8 +23,11 @@ public class UniversityGroup implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "subject")
+    private String subject;
+
+    @Column(name = "code")
+    private String code;
 
     @Column(name = "description")
     private String description;
@@ -50,17 +53,30 @@ public class UniversityGroup implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getSubject() {
+        return subject;
     }
 
-    public UniversityGroup name(String name) {
-        this.name = name;
+    public UniversityGroup subject(String subject) {
+        this.subject = subject;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public UniversityGroup code(String code) {
+        this.code = code;
+        return this;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getDescription() {
@@ -151,7 +167,8 @@ public class UniversityGroup implements Serializable {
     public String toString() {
         return "UniversityGroup{" +
             "id=" + id +
-            ", name='" + name + "'" +
+            ", subject='" + subject + "'" +
+            ", code='" + code + "'" +
             ", description='" + description + "'" +
             ", semester='" + semester + "'" +
             ", specialisation='" + specialisation + "'" +
