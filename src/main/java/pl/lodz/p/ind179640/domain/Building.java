@@ -1,6 +1,8 @@
 package pl.lodz.p.ind179640.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -50,7 +52,7 @@ public class Building implements Serializable {
     private String photoContentType;
 
     @OneToMany(mappedBy = "building")
-    @JsonIgnore
+    @JsonIgnoreProperties(value="building")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Classroom> rooms = new HashSet<>();
 

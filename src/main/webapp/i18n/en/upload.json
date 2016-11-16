@@ -1,5 +1,10 @@
 {
 	"upload" : {
-		"title":"Upload plan for department"
+		"plan":{
+			"title":"Upload plan for department"
+		},
+		"buildings":{
+			"title":"Upload buildings' description"
+		}
 	}
 }
