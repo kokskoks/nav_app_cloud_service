@@ -1,6 +1,7 @@
 package pl.lodz.p.ind179640.service.parser.weeia;
 
 import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -86,7 +87,7 @@ public class WeeiaParser implements Parser {
 	@Override
 	public void parse(byte[] planBytes) {
 		
-		try(Scanner planScanner = new Scanner(new ByteArrayInputStream(planBytes))){
+		try(Scanner planScanner = new Scanner(new ByteArrayInputStream(planBytes), StandardCharsets.UTF_8.name())){
 		
 			//ommit header line
 			planScanner.nextLine();

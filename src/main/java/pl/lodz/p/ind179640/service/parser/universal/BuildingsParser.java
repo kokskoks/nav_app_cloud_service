@@ -1,8 +1,10 @@
 package pl.lodz.p.ind179640.service.parser.universal;
 
 import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+import org.hibernate.metamodel.source.annotations.attribute.ColumnValues;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.lodz.p.ind179640.domain.Building;
+import pl.lodz.p.ind179640.domain.Sublocation;
 import pl.lodz.p.ind179640.repository.BuildingRepository;
+import pl.lodz.p.ind179640.repository.SublocationRepository;
 import pl.lodz.p.ind179640.service.parser.Parser;
 
 @Component(BuildingsParser.PARSER_NAME)
@@ -23,6 +27,8 @@ public class BuildingsParser implements Parser {
 	public static final String PARSER_NAME = "buildings";
 	
 	private final BuildingRepository buildingRepo;
+
+	private final SublocationRepository sublocationRepo;
 	
 	private final static String COLUMN_DELIMETER = ";";
 	
@@ -32,19 +38,21 @@ public class BuildingsParser implements Parser {
 	private static final int OBJECT_LONGITUDE = 3;
 	private static final int OBJECT_LATITUDE = 4;
 	private static final int OBJECT_DESCRIPTION = 5;
+	private static final int SUB_LOC_CODE = 6;
 	
 	
 	
 	@Autowired
-	public BuildingsParser(BuildingRepository buildingRepo) {
+	public BuildingsParser(BuildingRepository buildingRepo, SublocationRepository sublocationRepo) {
 		super();
 		this.buildingRepo = buildingRepo;
+		this.sublocationRepo = sublocationRepo;
 	}
 
 	@Override
 	public void parse(byte[] bytes) {
 		
-		try(Scanner buildingsScanner = new Scanner(new ByteArrayInputStream(bytes))){
+		try(Scanner buildingsScanner = new Scanner(new ByteArrayInputStream(bytes), StandardCharsets.UTF_8.name())){
 			
 			//ommit header line
 			buildingsScanner.nextLine();
@@ -73,18 +81,21 @@ public class BuildingsParser implements Parser {
 		
 		String description = columnValues[OBJECT_DESCRIPTION];
 		
-		parseBuilding(name, code, address, longitude, latitude, description);
+		String subLocCode = columnValues[SUB_LOC_CODE];
+		
+		parseBuilding(name, code, address, longitude, latitude, description, subLocCode);
 		
 		
 	}
 
 	private void parseBuilding(String name, String code, String address, String longitude, String latitude,
-			String description) {
+			String description, String subLocCode) {
+		
 		Building building = new Building();
 		building.setCode(code);
 		
-		Example<Building> lecturerExample = Example.of(building);
-		Building buildingResult = buildingRepo.findOne(lecturerExample);
+		Example<Building> buildingExample = Example.of(building);
+		Building buildingResult = buildingRepo.findOne(buildingExample);
 		
 		if(buildingResult != null){
 			building = buildingResult;
@@ -96,7 +107,11 @@ public class BuildingsParser implements Parser {
 		
 		Double latitudeDouble = parseStringDouble(latitude);
 		
-		building.setName(name);
+		Sublocation sublocation = parseSublocation(name, subLocCode);
+		
+		building.addSublocations(sublocation);
+		
+		
 		
 		building.setLatitude(latitudeDouble);
 		
@@ -105,6 +120,23 @@ public class BuildingsParser implements Parser {
 		building.setStreet(address);
 		
 		building.setDescription(description);
+	}
+
+	private Sublocation parseSublocation(String name, String subLocCode) {
+		Sublocation sublocation = new Sublocation();
+		sublocation.setCode(Integer.valueOf(subLocCode));
+		
+		Example<Sublocation> sublocationExample = Example.of(sublocation);
+		Sublocation sublocationResult = sublocationRepo.findOne(sublocationExample);
+		
+		if(sublocationResult != null){
+			sublocation = sublocationResult;
+		} else {
+			sublocation = sublocationRepo.save(sublocation);
+		}
+		
+		sublocation.setName(name);
+		return sublocation;
 	}
 
 	private Double parseStringDouble(String doubleString) {
