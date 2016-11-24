@@ -32,13 +32,14 @@ public class BuildingsParser implements Parser {
 	
 	private final static String COLUMN_DELIMETER = ";";
 	
-	private static final int OBJECT_NAME = 0;
+	private static final int SUB_LOC_NAME = 0;
 	private static final int OBJECT_CODE = 1;
 	private static final int OBJECT_ADDRESS = 2;
 	private static final int OBJECT_LONGITUDE = 3;
 	private static final int OBJECT_LATITUDE = 4;
 	private static final int OBJECT_DESCRIPTION = 5;
 	private static final int SUB_LOC_CODE = 6;
+	private static final int OBJECT_NAME = 7;
 	
 	
 	
@@ -69,7 +70,7 @@ public class BuildingsParser implements Parser {
 		
 		String[] columnValues = line.split(COLUMN_DELIMETER);
 		
-		String name = columnValues[OBJECT_NAME];
+		String subLocName = columnValues[SUB_LOC_NAME];
 		
 		String code = columnValues[OBJECT_CODE];
 		
@@ -83,13 +84,15 @@ public class BuildingsParser implements Parser {
 		
 		String subLocCode = columnValues[SUB_LOC_CODE];
 		
-		parseBuilding(name, code, address, longitude, latitude, description, subLocCode);
+		String buildingName = columnValues[OBJECT_NAME];
+		
+		parseBuilding(subLocName, code, address, longitude, latitude, description, subLocCode, buildingName);
 		
 		
 	}
 
-	private void parseBuilding(String name, String code, String address, String longitude, String latitude,
-			String description, String subLocCode) {
+	private void parseBuilding(String subLocName, String code, String address, String longitude, String latitude,
+			String description, String subLocCode, String buildingName) {
 		
 		Building building = new Building();
 		building.setCode(code);
@@ -107,11 +110,11 @@ public class BuildingsParser implements Parser {
 		
 		Double latitudeDouble = parseStringDouble(latitude);
 		
-		Sublocation sublocation = parseSublocation(name, subLocCode);
+		Sublocation sublocation = parseSublocation(subLocName, subLocCode);
 		
 		building.addSublocations(sublocation);
 		
-		
+		building.setName(buildingName);
 		
 		building.setLatitude(latitudeDouble);
 		
