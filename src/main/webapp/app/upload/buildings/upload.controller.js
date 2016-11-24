@@ -30,7 +30,7 @@
         		vm.inProgress = true;
         		Upload.upload({
                     url: '/upload/buildings',
-                    data: {plan: vm.file}
+                    data: {buildings: vm.file}
                 }).then(function (resp) {
                     console.log('Success ' + resp + 'uploaded. Response: ' + resp.data);
                     
