@@ -3,6 +3,12 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
+            "relationshipName": "sublocations",
+            "otherEntityName": "sublocation",
+            "otherEntityRelationshipName": "building"
+        },
+        {
+            "relationshipType": "one-to-many",
             "relationshipName": "rooms",
             "otherEntityName": "classroom",
             "otherEntityRelationshipName": "building"
@@ -32,11 +38,6 @@
         {
             "fieldName": "latitude",
             "fieldType": "Double"
-        },
-        {
-            "fieldName": "photo",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image"
         }
     ],
     "changelogDate": "20161020215200",

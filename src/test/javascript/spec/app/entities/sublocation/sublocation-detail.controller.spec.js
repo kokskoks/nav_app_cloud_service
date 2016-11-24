@@ -2,9 +2,9 @@
 
 describe('Controller Tests', function() {
 
-    describe('Building Management Detail Controller', function() {
+    describe('Sublocation Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockBuilding, MockSublocation, MockClassroom;
+        var MockEntity, MockPreviousState, MockSublocation, MockBuilding;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -12,9 +12,8 @@ describe('Controller Tests', function() {
             $scope = $rootScope.$new();
             MockEntity = jasmine.createSpy('MockEntity');
             MockPreviousState = jasmine.createSpy('MockPreviousState');
-            MockBuilding = jasmine.createSpy('MockBuilding');
             MockSublocation = jasmine.createSpy('MockSublocation');
-            MockClassroom = jasmine.createSpy('MockClassroom');
+            MockBuilding = jasmine.createSpy('MockBuilding');
             
 
             var locals = {
@@ -22,19 +21,18 @@ describe('Controller Tests', function() {
                 '$rootScope': $rootScope,
                 'entity': MockEntity,
                 'previousState': MockPreviousState,
-                'Building': MockBuilding,
                 'Sublocation': MockSublocation,
-                'Classroom': MockClassroom
+                'Building': MockBuilding
             };
             createController = function() {
-                $injector.get('$controller')("BuildingDetailController", locals);
+                $injector.get('$controller')("SublocationDetailController", locals);
             };
         }));
 
 
         describe('Root Scope Listening', function() {
             it('Unregisters root scope listener upon scope destruction', function() {
-                var eventType = 'navAppApp:buildingUpdate';
+                var eventType = 'navAppApp:sublocationUpdate';
 
                 createController();
                 expect($rootScope.$$listenerCount[eventType]).toEqual(1);

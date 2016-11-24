@@ -44,15 +44,13 @@ public class Building implements Serializable {
     @Column(name = "latitude")
     private Double latitude;
 
-    @Lob
-    @Column(name = "photo")
-    private byte[] photo;
+    @OneToMany(mappedBy = "building",fetch=FetchType.EAGER)
+    @JsonIgnoreProperties({"building"})
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Sublocation> sublocations = new HashSet<>();
 
-    @Column(name = "photo_content_type")
-    private String photoContentType;
-
-    @OneToMany(mappedBy = "building")
-    @JsonIgnoreProperties(value="building")
+    @OneToMany(mappedBy = "building",fetch=FetchType.EAGER)
+    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Classroom> rooms = new HashSet<>();
 
@@ -142,30 +140,29 @@ public class Building implements Serializable {
         this.latitude = latitude;
     }
 
-    public byte[] getPhoto() {
-        return photo;
+    public Set<Sublocation> getSublocations() {
+        return sublocations;
     }
 
-    public Building photo(byte[] photo) {
-        this.photo = photo;
+    public Building sublocations(Set<Sublocation> sublocations) {
+        this.sublocations = sublocations;
         return this;
     }
 
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
-
-    public String getPhotoContentType() {
-        return photoContentType;
-    }
-
-    public Building photoContentType(String photoContentType) {
-        this.photoContentType = photoContentType;
+    public Building addSublocations(Sublocation sublocation) {
+        sublocations.add(sublocation);
+        sublocation.setBuilding(this);
         return this;
     }
 
-    public void setPhotoContentType(String photoContentType) {
-        this.photoContentType = photoContentType;
+    public Building removeSublocations(Sublocation sublocation) {
+        sublocations.remove(sublocation);
+        sublocation.setBuilding(null);
+        return this;
+    }
+
+    public void setSublocations(Set<Sublocation> sublocations) {
+        this.sublocations = sublocations;
     }
 
     public Set<Classroom> getRooms() {
@@ -223,8 +220,6 @@ public class Building implements Serializable {
             ", street='" + street + "'" +
             ", longitude='" + longitude + "'" +
             ", latitude='" + latitude + "'" +
-            ", photo='" + photo + "'" +
-            ", photoContentType='" + photoContentType + "'" +
             '}';
     }
 }

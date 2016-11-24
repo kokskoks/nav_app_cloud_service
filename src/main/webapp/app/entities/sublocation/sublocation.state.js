@@ -9,53 +9,53 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('building', {
+        .state('sublocation', {
             parent: 'entity',
-            url: '/building',
+            url: '/sublocation',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'navAppApp.building.home.title'
+                pageTitle: 'navAppApp.sublocation.home.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/building/buildings.html',
-                    controller: 'BuildingController',
+                    templateUrl: 'app/entities/sublocation/sublocations.html',
+                    controller: 'SublocationController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('building');
+                    $translatePartialLoader.addPart('sublocation');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
             }
         })
-        .state('building-detail', {
+        .state('sublocation-detail', {
             parent: 'entity',
-            url: '/building/{id}',
+            url: '/sublocation/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'navAppApp.building.detail.title'
+                pageTitle: 'navAppApp.sublocation.detail.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/building/building-detail.html',
-                    controller: 'BuildingDetailController',
+                    templateUrl: 'app/entities/sublocation/sublocation-detail.html',
+                    controller: 'SublocationDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('building');
+                    $translatePartialLoader.addPart('sublocation');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'Building', function($stateParams, Building) {
-                    return Building.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'Sublocation', function($stateParams, Sublocation) {
+                    return Sublocation.get({id : $stateParams.id}).$promise;
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
-                        name: $state.current.name || 'building',
+                        name: $state.current.name || 'sublocation',
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };
@@ -63,22 +63,22 @@
                 }]
             }
         })
-        .state('building-detail.edit', {
-            parent: 'building-detail',
+        .state('sublocation-detail.edit', {
+            parent: 'sublocation-detail',
             url: '/detail/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/building/building-dialog.html',
-                    controller: 'BuildingDialogController',
+                    templateUrl: 'app/entities/sublocation/sublocation-dialog.html',
+                    controller: 'SublocationDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['Building', function(Building) {
-                            return Building.get({id : $stateParams.id}).$promise;
+                        entity: ['Sublocation', function(Sublocation) {
+                            return Sublocation.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -88,83 +88,79 @@
                 });
             }]
         })
-        .state('building.new', {
-            parent: 'building',
+        .state('sublocation.new', {
+            parent: 'sublocation',
             url: '/new',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/building/building-dialog.html',
-                    controller: 'BuildingDialogController',
+                    templateUrl: 'app/entities/sublocation/sublocation-dialog.html',
+                    controller: 'SublocationDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
                         entity: function () {
                             return {
-                                name: null,
                                 code: null,
-                                description: null,
-                                street: null,
-                                longitude: null,
-                                latitude: null,
+                                name: null,
                                 id: null
                             };
                         }
                     }
                 }).result.then(function() {
-                    $state.go('building', null, { reload: 'building' });
+                    $state.go('sublocation', null, { reload: 'sublocation' });
                 }, function() {
-                    $state.go('building');
+                    $state.go('sublocation');
                 });
             }]
         })
-        .state('building.edit', {
-            parent: 'building',
+        .state('sublocation.edit', {
+            parent: 'sublocation',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/building/building-dialog.html',
-                    controller: 'BuildingDialogController',
+                    templateUrl: 'app/entities/sublocation/sublocation-dialog.html',
+                    controller: 'SublocationDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['Building', function(Building) {
-                            return Building.get({id : $stateParams.id}).$promise;
+                        entity: ['Sublocation', function(Sublocation) {
+                            return Sublocation.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('building', null, { reload: 'building' });
+                    $state.go('sublocation', null, { reload: 'sublocation' });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('building.delete', {
-            parent: 'building',
+        .state('sublocation.delete', {
+            parent: 'sublocation',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/building/building-delete-dialog.html',
-                    controller: 'BuildingDeleteController',
+                    templateUrl: 'app/entities/sublocation/sublocation-delete-dialog.html',
+                    controller: 'SublocationDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['Building', function(Building) {
-                            return Building.get({id : $stateParams.id}).$promise;
+                        entity: ['Sublocation', function(Sublocation) {
+                            return Sublocation.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('building', null, { reload: 'building' });
+                    $state.go('sublocation', null, { reload: 'sublocation' });
                 }, function() {
                     $state.go('^');
                 });

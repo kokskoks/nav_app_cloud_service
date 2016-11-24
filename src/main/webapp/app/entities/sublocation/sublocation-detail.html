@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span data-translate="navAppApp.sublocation.detail.title">Sublocation</span> {{vm.sublocation.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="navAppApp.sublocation.code">Code</span></dt>
+        <dd>
+            <span>{{vm.sublocation.code}}</span>
+        </dd>
+        <dt><span data-translate="navAppApp.sublocation.name">Name</span></dt>
+        <dd>
+            <span>{{vm.sublocation.name}}</span>
+        </dd>
+        <dt><span data-translate="navAppApp.sublocation.building">Building</span></dt>
+        <dd>
+            <a ui-sref="building-detail({id:vm.sublocation.building.id})">{{vm.sublocation.building.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="sublocation-detail.edit({id:vm.sublocation.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

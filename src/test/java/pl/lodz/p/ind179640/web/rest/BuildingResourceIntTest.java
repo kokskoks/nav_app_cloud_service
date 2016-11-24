@@ -20,7 +20,6 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -57,11 +56,6 @@ public class BuildingResourceIntTest {
 
     private static final Double DEFAULT_LATITUDE = 1D;
     private static final Double UPDATED_LATITUDE = 2D;
-
-    private static final byte[] DEFAULT_PHOTO = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_PHOTO = TestUtil.createByteArray(2, "1");
-    private static final String DEFAULT_PHOTO_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_PHOTO_CONTENT_TYPE = "image/png";
 
     @Inject
     private BuildingRepository buildingRepository;
@@ -105,9 +99,7 @@ public class BuildingResourceIntTest {
                 .description(DEFAULT_DESCRIPTION)
                 .street(DEFAULT_STREET)
                 .longitude(DEFAULT_LONGITUDE)
-                .latitude(DEFAULT_LATITUDE)
-                .photo(DEFAULT_PHOTO)
-                .photoContentType(DEFAULT_PHOTO_CONTENT_TYPE);
+                .latitude(DEFAULT_LATITUDE);
         return building;
     }
 
@@ -138,8 +130,6 @@ public class BuildingResourceIntTest {
         assertThat(testBuilding.getStreet()).isEqualTo(DEFAULT_STREET);
         assertThat(testBuilding.getLongitude()).isEqualTo(DEFAULT_LONGITUDE);
         assertThat(testBuilding.getLatitude()).isEqualTo(DEFAULT_LATITUDE);
-        assertThat(testBuilding.getPhoto()).isEqualTo(DEFAULT_PHOTO);
-        assertThat(testBuilding.getPhotoContentType()).isEqualTo(DEFAULT_PHOTO_CONTENT_TYPE);
     }
 
     @Test
@@ -158,9 +148,7 @@ public class BuildingResourceIntTest {
                 .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
                 .andExpect(jsonPath("$.[*].street").value(hasItem(DEFAULT_STREET.toString())))
                 .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.doubleValue())))
-                .andExpect(jsonPath("$.[*].latitude").value(hasItem(DEFAULT_LATITUDE.doubleValue())))
-                .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
-                .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))));
+                .andExpect(jsonPath("$.[*].latitude").value(hasItem(DEFAULT_LATITUDE.doubleValue())));
     }
 
     @Test
@@ -179,9 +167,7 @@ public class BuildingResourceIntTest {
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.street").value(DEFAULT_STREET.toString()))
             .andExpect(jsonPath("$.longitude").value(DEFAULT_LONGITUDE.doubleValue()))
-            .andExpect(jsonPath("$.latitude").value(DEFAULT_LATITUDE.doubleValue()))
-            .andExpect(jsonPath("$.photoContentType").value(DEFAULT_PHOTO_CONTENT_TYPE))
-            .andExpect(jsonPath("$.photo").value(Base64Utils.encodeToString(DEFAULT_PHOTO)));
+            .andExpect(jsonPath("$.latitude").value(DEFAULT_LATITUDE.doubleValue()));
     }
 
     @Test
@@ -208,9 +194,7 @@ public class BuildingResourceIntTest {
                 .description(UPDATED_DESCRIPTION)
                 .street(UPDATED_STREET)
                 .longitude(UPDATED_LONGITUDE)
-                .latitude(UPDATED_LATITUDE)
-                .photo(UPDATED_PHOTO)
-                .photoContentType(UPDATED_PHOTO_CONTENT_TYPE);
+                .latitude(UPDATED_LATITUDE);
 
         restBuildingMockMvc.perform(put("/api/buildings")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -227,8 +211,6 @@ public class BuildingResourceIntTest {
         assertThat(testBuilding.getStreet()).isEqualTo(UPDATED_STREET);
         assertThat(testBuilding.getLongitude()).isEqualTo(UPDATED_LONGITUDE);
         assertThat(testBuilding.getLatitude()).isEqualTo(UPDATED_LATITUDE);
-        assertThat(testBuilding.getPhoto()).isEqualTo(UPDATED_PHOTO);
-        assertThat(testBuilding.getPhotoContentType()).isEqualTo(UPDATED_PHOTO_CONTENT_TYPE);
     }
 
     @Test

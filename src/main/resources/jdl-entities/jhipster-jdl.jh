@@ -29,7 +29,6 @@ entity Building {
     street String
     longitude Double
     latitude Double
-	photo ImageBlob
 }
 
 entity UniversityGroup {
@@ -52,6 +51,15 @@ entity Week {
 	number Integer
 	startDate LocalDate
 	endDate LocalDate
+}
+
+entity Sublocation {
+	code Integer
+	name String
+}
+
+relationship OneToMany {
+	Building{sublocations} to Sublocation
 }
 
 relationship ManyToMany {

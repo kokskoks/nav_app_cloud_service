@@ -30,6 +30,7 @@
       "de",
       "pl"
     ],
-    "serviceDiscoveryType": false
+    "serviceDiscoveryType": false,
+    "herokuAppName": "nav-app"
   }
 }

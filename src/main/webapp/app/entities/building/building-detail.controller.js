@@ -5,15 +5,13 @@
         .module('navAppApp')
         .controller('BuildingDetailController', BuildingDetailController);
 
-    BuildingDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Building', 'Classroom'];
+    BuildingDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Building', 'Sublocation', 'Classroom'];
 
-    function BuildingDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, Building, Classroom) {
+    function BuildingDetailController($scope, $rootScope, $stateParams, previousState, entity, Building, Sublocation, Classroom) {
         var vm = this;
 
         vm.building = entity;
         vm.previousState = previousState.name;
-        vm.byteSize = DataUtils.byteSize;
-        vm.openFile = DataUtils.openFile;
 
         var unsubscribe = $rootScope.$on('navAppApp:buildingUpdate', function(event, result) {
             vm.building = result;

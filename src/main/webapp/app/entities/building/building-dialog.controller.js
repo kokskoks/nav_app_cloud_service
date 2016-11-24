@@ -5,16 +5,15 @@
         .module('navAppApp')
         .controller('BuildingDialogController', BuildingDialogController);
 
-    BuildingDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Building', 'Classroom'];
+    BuildingDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Building', 'Sublocation', 'Classroom'];
 
-    function BuildingDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Building, Classroom) {
+    function BuildingDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Building, Sublocation, Classroom) {
         var vm = this;
 
         vm.building = entity;
         vm.clear = clear;
-        vm.byteSize = DataUtils.byteSize;
-        vm.openFile = DataUtils.openFile;
         vm.save = save;
+        vm.sublocations = Sublocation.query();
         vm.classrooms = Classroom.query();
 
         $timeout(function (){
@@ -44,20 +43,6 @@
             vm.isSaving = false;
         }
 
-
-        vm.setPhoto = function ($file, building) {
-            if ($file && $file.$error === 'pattern') {
-                return;
-            }
-            if ($file) {
-                DataUtils.toBase64($file, function(base64Data) {
-                    $scope.$apply(function() {
-                        building.photo = base64Data;
-                        building.photoContentType = $file.type;
-                    });
-                });
-            }
-        };
 
     }
 })();

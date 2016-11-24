@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the Building entity.
+ * Performance test for the Sublocation entity.
  */
-class BuildingGatlingTest extends Simulation {
+class SublocationGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -37,7 +37,7 @@ class BuildingGatlingTest extends Simulation {
         "X-CSRF-TOKEN" -> "${csrf_token}"
     )
 
-    val scn = scenario("Test the Building entity")
+    val scn = scenario("Test the Sublocation entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -59,26 +59,26 @@ class BuildingGatlingTest extends Simulation {
         .check(headerRegex("Set-Cookie", "CSRF-TOKEN=(.*);[\\s]?[P,p]ath=/").saveAs("csrf_token")))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all buildings")
-            .get("/api/buildings")
+            exec(http("Get all sublocations")
+            .get("/api/sublocations")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new building")
-            .post("/api/buildings")
+            .exec(http("Create new sublocation")
+            .post("/api/sublocations")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "code":"SAMPLE_TEXT", "description":"SAMPLE_TEXT", "street":"SAMPLE_TEXT", "longitude":null, "latitude":null}""")).asJSON
+            .body(StringBody("""{"id":null, "code":"0", "name":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_building_url"))).exitHereIfFailed
+            .check(headerRegex("Location", "(.*)").saveAs("new_sublocation_url"))).exitHereIfFailed
             .pause(10)
             .repeat(5) {
-                exec(http("Get created building")
-                .get("${new_building_url}")
+                exec(http("Get created sublocation")
+                .get("${new_sublocation_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created building")
-            .delete("${new_building_url}")
+            .exec(http("Delete created sublocation")
+            .delete("${new_sublocation_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

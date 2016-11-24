@@ -26,6 +26,7 @@
                 "universityClass": "University Class",
                 "classroom": "Classroom",
                 "week": "Week",
+                "sublocation": "Sublocation",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

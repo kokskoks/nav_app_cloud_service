@@ -89,5 +89,13 @@
         timeToLiveSeconds="3600">
     </cache>
 
+    <cache name="pl.lodz.p.ind179640.domain.Building.sublocations"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="pl.lodz.p.ind179640.domain.Sublocation"
+        timeToLiveSeconds="3600">
+    </cache>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </ehcache>

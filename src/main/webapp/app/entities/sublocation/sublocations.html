@@ -1,13 +1,13 @@
 <div>
-    <h2 data-translate="navAppApp.building.home.title">Buildings</h2>
+    <h2 data-translate="navAppApp.sublocation.home.title">Sublocations</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="building.new" >
+                <button class="btn btn-primary" ui-sref="sublocation.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span  data-translate="navAppApp.building.home.createLabel">
-                        Create new Building
+                    <span  data-translate="navAppApp.sublocation.home.createLabel">
+                        Create new Sublocation
                     </span>
                 </button>
             </div>
@@ -19,40 +19,36 @@
             <thead>
                 <tr>
                     <th><span data-translate="global.field.id">ID</span></th>
-                    <th><span data-translate="navAppApp.building.name">Name</span></th>
-                    <th><span data-translate="navAppApp.building.code">Code</span></th>
-                    <th><span data-translate="navAppApp.building.description">Description</span></th>
-                    <th><span data-translate="navAppApp.building.street">Street</span></th>
-                    <th><span data-translate="navAppApp.building.longitude">Longitude</span></th>
-                    <th><span data-translate="navAppApp.building.latitude">Latitude</span></th>
+                    <th><span data-translate="navAppApp.sublocation.code">Code</span></th>
+                    <th><span data-translate="navAppApp.sublocation.name">Name</span></th>
+                    <th><span data-translate="navAppApp.sublocation.building">Building</span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="building in vm.buildings track by building.id">
-                    <td><a ui-sref="building-detail({id:building.id})">{{building.id}}</a></td>
-                    <td>{{building.name}}</td>
-                    <td>{{building.code}}</td>
-                    <td>{{building.description}}</td>
-                    <td>{{building.street}}</td>
-                    <td>{{building.longitude}}</td>
-                    <td>{{building.latitude}}</td>
+                <tr ng-repeat="sublocation in vm.sublocations track by sublocation.id">
+                    <td><a ui-sref="sublocation-detail({id:sublocation.id})">{{sublocation.id}}</a></td>
+                    <td>{{sublocation.code}}</td>
+                    <td>{{sublocation.name}}</td>
+                    <td>
+                        <a ui-sref="building-detail({id:sublocation.building.id})">{{sublocation.building.id}}</a>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="building-detail({id:building.id})"
+                                    ui-sref="sublocation-detail({id:sublocation.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="building.edit({id:building.id})"
+                                    ui-sref="sublocation.edit({id:sublocation.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="building.delete({id:building.id})"
+                                    ui-sref="sublocation.delete({id:sublocation.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>

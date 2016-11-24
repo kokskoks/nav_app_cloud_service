@@ -28,15 +28,6 @@
         <dd>
             <span>{{vm.building.latitude}}</span>
         </dd>
-        <dt><span data-translate="navAppApp.building.photo">Photo</span></dt>
-        <dd>
-            <div ng-if="vm.building.photo">
-                <a ng-click="vm.openFile(vm.building.photoContentType, vm.building.photo)">
-                    <img data-ng-src="{{'data:' + vm.building.photoContentType + ';base64,' + vm.building.photo}}" style="max-width: 100%;"/>
-                </a>
-                {{vm.building.photoContentType}}, {{vm.byteSize(vm.building.photo)}}
-            </div>
-        </dd>
     </dl>
 
     <button type="submit"

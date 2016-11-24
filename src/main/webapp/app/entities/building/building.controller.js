@@ -5,14 +5,12 @@
         .module('navAppApp')
         .controller('BuildingController', BuildingController);
 
-    BuildingController.$inject = ['$scope', '$state', 'DataUtils', 'Building'];
+    BuildingController.$inject = ['$scope', '$state', 'Building'];
 
-    function BuildingController ($scope, $state, DataUtils, Building) {
+    function BuildingController ($scope, $state, Building) {
         var vm = this;
         
         vm.buildings = [];
-        vm.openFile = DataUtils.openFile;
-        vm.byteSize = DataUtils.byteSize;
 
         loadAll();
 

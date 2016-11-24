@@ -22,7 +22,7 @@
             "street": "Street",
             "longitude": "Longitude",
             "latitude": "Latitude",
-            "photo": "Photo",
+            "sublocations": "Sublocations",
             "rooms": "Rooms"
         }
     }
