@@ -58,6 +58,11 @@ entity Sublocation {
 	name String
 }
 
+entity Version {
+	ver Integer
+	name String
+}
+
 relationship OneToMany {
 	Building{sublocations} to Sublocation
 }

@@ -97,5 +97,9 @@
         timeToLiveSeconds="3600">
     </cache>
 
+    <cache name="pl.lodz.p.ind179640.domain.Version"
+        timeToLiveSeconds="3600">
+    </cache>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </ehcache>

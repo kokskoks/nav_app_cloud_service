@@ -8,12 +8,12 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A Sublocation.
+ * A Version.
  */
 @Entity
-@Table(name = "sublocation")
+@Table(name = "version")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Sublocation implements Serializable {
+public class Version implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -21,14 +21,11 @@ public class Sublocation implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "code")
-    private Integer code;
+    @Column(name = "ver")
+    private Integer ver;
 
     @Column(name = "name")
     private String name;
-
-    @ManyToOne
-    private Building building;
 
     public Long getId() {
         return id;
@@ -38,43 +35,30 @@ public class Sublocation implements Serializable {
         this.id = id;
     }
 
-    public Integer getCode() {
-        return code;
+    public Integer getVer() {
+        return ver;
     }
 
-    public Sublocation code(Integer code) {
-        this.code = code;
+    public Version ver(Integer ver) {
+        this.ver = ver;
         return this;
     }
 
-    public void setCode(Integer code) {
-        this.code = code;
+    public void setVer(Integer ver) {
+        this.ver = ver;
     }
 
     public String getName() {
         return name;
     }
 
-    public Sublocation name(String name) {
+    public Version name(String name) {
         this.name = name;
         return this;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Building getBuilding() {
-        return building;
-    }
-
-    public Sublocation building(Building building) {
-        this.building = building;
-        return this;
-    }
-
-    public void setBuilding(Building building) {
-        this.building = building;
     }
 
     @Override
@@ -85,11 +69,11 @@ public class Sublocation implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Sublocation sublocation = (Sublocation) o;
-        if(sublocation.id == null || id == null) {
+        Version version = (Version) o;
+        if(version.id == null || id == null) {
             return false;
         }
-        return Objects.equals(id, sublocation.id);
+        return Objects.equals(id, version.id);
     }
 
     @Override
@@ -99,9 +83,9 @@ public class Sublocation implements Serializable {
 
     @Override
     public String toString() {
-        return "Sublocation{" +
+        return "Version{" +
             "id=" + id +
-            ", code='" + code + "'" +
+            ", ver='" + ver + "'" +
             ", name='" + name + "'" +
             '}';
     }

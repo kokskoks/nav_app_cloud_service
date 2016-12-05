@@ -1,0 +1,23 @@
+{
+    "navAppApp": {
+        "version" : {
+            "home": {
+                "title": "Versions",
+                "createLabel": "Dodaj Version",
+                "createOrEditLabel": "Dodaj lub edytuj: Version",
+                "search": "Search for Version"
+            },
+            "created": "A new Version is created with identifier {{ param }}",
+            "updated": "A Version is updated with identifier {{ param }}",
+            "deleted": "A Version is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć Version {{ id }}?"
+            },
+            "detail": {
+                "title": "Version"
+            },
+            "ver": "Ver",
+            "name": "Name"
+        }
+    }
+}
