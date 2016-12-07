@@ -3,6 +3,10 @@ package pl.lodz.p.ind179640.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import pl.lodz.p.ind179640.domain.UniversityGroup;
 import pl.lodz.p.ind179640.service.UniversityGroupService;
+import pl.lodz.p.ind179640.service.dto.UniversityGroupDTO;
+import pl.lodz.p.ind179640.service.mapper.UniversityGroupMapper;
+import pl.lodz.p.ind179640.service.parser.VersionUpdate;
+import pl.lodz.p.ind179640.service.parser.weeia.WeeiaParser;
 import pl.lodz.p.ind179640.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +33,9 @@ public class UniversityGroupResource {
         
     @Inject
     private UniversityGroupService universityGroupService;
+    
+    @Inject
+    private UniversityGroupMapper universityGroupMapper;
 
     /**
      * POST  /university-groups : Create a new universityGroup.
@@ -41,6 +48,7 @@ public class UniversityGroupResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @VersionUpdate(name = WeeiaParser.PARSER_NAME)
     public ResponseEntity<UniversityGroup> createUniversityGroup(@RequestBody UniversityGroup universityGroup) throws URISyntaxException {
         log.debug("REST request to save UniversityGroup : {}", universityGroup);
         if (universityGroup.getId() != null) {
@@ -65,6 +73,7 @@ public class UniversityGroupResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @VersionUpdate(name = WeeiaParser.PARSER_NAME)
     public ResponseEntity<UniversityGroup> updateUniversityGroup(@RequestBody UniversityGroup universityGroup) throws URISyntaxException {
         log.debug("REST request to update UniversityGroup : {}", universityGroup);
         if (universityGroup.getId() == null) {
@@ -87,9 +96,22 @@ public class UniversityGroupResource {
     @Timed
     public List<UniversityGroup> getAllUniversityGroups() {
         log.debug("REST request to get all UniversityGroups");
-        return universityGroupService.findAll();
+        List<UniversityGroup> universityGroups = universityGroupService.findAll();
+        universityGroups.forEach( group -> group.setClasses(null));
+        return universityGroups;
     }
 
+    @RequestMapping(value="/university-groups-dto",
+    		method = RequestMethod.GET,
+    		produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<UniversityGroupDTO> getAllUniversityGroupsDto(){
+    	log.debug("REST request to get all UniversityGroupsDtos");
+    	List<UniversityGroup> universityGroups = universityGroupService.findAll();
+    	List<UniversityGroupDTO> universityGroupDTOs = universityGroupMapper.universityGroupsToUniversityGroupDTOs(universityGroups);
+    	return universityGroupDTOs;
+    }
+    
     /**
      * GET  /university-groups/:id : get the "id" universityGroup.
      *
@@ -120,6 +142,7 @@ public class UniversityGroupResource {
         method = RequestMethod.DELETE,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @VersionUpdate(name = WeeiaParser.PARSER_NAME)
     public ResponseEntity<Void> deleteUniversityGroup(@PathVariable Long id) {
         log.debug("REST request to delete UniversityGroup : {}", id);
         universityGroupService.delete(id);

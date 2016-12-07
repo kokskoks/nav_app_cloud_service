@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.lodz.p.ind179640.domain.Building;
 import pl.lodz.p.ind179640.domain.Version;
 import pl.lodz.p.ind179640.repository.VersionRepository;
+import pl.lodz.p.ind179640.service.parser.weeia.WeeiaParser;
 
 @Service
 public class ParsersDispatcherImpl implements ParsersDispatcher{
@@ -40,38 +41,8 @@ public class ParsersDispatcherImpl implements ParsersDispatcher{
 		
 		parser.parse(bytes);
 		
-		updateVersion(dept);
-		
 	}
 
 
-	@Transactional
-	protected void updateVersion(String dept) {
-
-		Version version = new Version();
-		version.setName(dept);
-		
-		Example<Version> versionExample = Example.of(version);
-		Version versionResult = versionRepo.findOne(versionExample);
-		
-		if(versionResult != null){
-			version = versionResult;
-			Integer ver = version.getVer();
-			
-			if(ver != null){
-				ver++;
-			} else {
-				ver = 0;
-			}
-			
-			version.setVer(ver);
-			
-		} else {
-			version.setVer(0);
-			version = versionRepo.save(version);
-		}
-		
-		
-	}
 
 }

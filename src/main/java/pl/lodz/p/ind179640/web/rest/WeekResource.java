@@ -3,6 +3,8 @@ package pl.lodz.p.ind179640.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import pl.lodz.p.ind179640.domain.Week;
 import pl.lodz.p.ind179640.service.WeekService;
+import pl.lodz.p.ind179640.service.parser.VersionUpdate;
+import pl.lodz.p.ind179640.service.parser.weeia.WeeiaParser;
 import pl.lodz.p.ind179640.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +43,7 @@ public class WeekResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @VersionUpdate(name = WeeiaParser.PARSER_NAME)
     public ResponseEntity<Week> createWeek(@RequestBody Week week) throws URISyntaxException {
         log.debug("REST request to save Week : {}", week);
         if (week.getId() != null) {
@@ -65,6 +68,7 @@ public class WeekResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @VersionUpdate(name = WeeiaParser.PARSER_NAME)
     public ResponseEntity<Week> updateWeek(@RequestBody Week week) throws URISyntaxException {
         log.debug("REST request to update Week : {}", week);
         if (week.getId() == null) {
@@ -120,6 +124,7 @@ public class WeekResource {
         method = RequestMethod.DELETE,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @VersionUpdate(name = WeeiaParser.PARSER_NAME)
     public ResponseEntity<Void> deleteWeek(@PathVariable Long id) {
         log.debug("REST request to delete Week : {}", id);
         weekService.delete(id);

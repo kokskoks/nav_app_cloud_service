@@ -65,7 +65,7 @@ public class UniversityGroupDTO implements Serializable {
     }
 
     public void setClasses(Set<UniversityClassDTO> universityClasses) {
-        this.classes = universityClasses;
+
     }
 
     @Override

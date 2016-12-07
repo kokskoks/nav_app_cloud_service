@@ -1,6 +1,8 @@
 package pl.lodz.p.ind179640.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -42,12 +44,12 @@ public class Building implements Serializable {
     @Column(name = "latitude")
     private Double latitude;
 
-    @OneToMany(mappedBy = "building")
-    @JsonIgnore
+    @OneToMany(mappedBy = "building",fetch=FetchType.EAGER)
+    @JsonIgnoreProperties({"building"})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Sublocation> sublocations = new HashSet<>();
 
-    @OneToMany(mappedBy = "building")
+    @OneToMany(mappedBy = "building",fetch=FetchType.EAGER)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Classroom> rooms = new HashSet<>();

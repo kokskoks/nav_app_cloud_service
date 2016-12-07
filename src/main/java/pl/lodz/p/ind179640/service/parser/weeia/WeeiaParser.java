@@ -28,10 +28,14 @@ import pl.lodz.p.ind179640.repository.UniversityClassRepository;
 import pl.lodz.p.ind179640.repository.UniversityGroupRepository;
 import pl.lodz.p.ind179640.repository.WeekRepository;
 import pl.lodz.p.ind179640.service.parser.Parser;
+import pl.lodz.p.ind179640.service.parser.VersionUpdate;
+import pl.lodz.p.ind179640.service.parser.universal.BuildingsParser;
 
-@Component(value = "weeia")
+@Component(value = WeeiaParser.PARSER_NAME)
 @Transactional
 public class WeeiaParser implements Parser {
+
+    public static final String PARSER_NAME = "weeia";
 
 	private static final Logger log = LoggerFactory.getLogger(WeeiaParser.class);
 
@@ -85,6 +89,7 @@ public class WeeiaParser implements Parser {
 	}
 
 	@Override
+	@VersionUpdate(name = WeeiaParser.PARSER_NAME)
 	public void parse(byte[] planBytes) {
 		
 		try(Scanner planScanner = new Scanner(new ByteArrayInputStream(planBytes), StandardCharsets.UTF_8.name())){
@@ -337,13 +342,13 @@ public class WeeiaParser implements Parser {
 		case "laboratorium":
 			uniClass.setType(ClassType.LABORATORY);
 			break;
-		case "wyk³ad":
+		case "wykÅ‚ad":
 			uniClass.setType(ClassType.LECTURE);
 			break;
 		case "seminarium":
 			uniClass.setType(ClassType.SEMINARY);
 			break;
-		case "æwiczenia":
+		case "Ä‡wiczenia":
 			uniClass.setType(ClassType.EXERCISE);
 			break;
 		case "sport":
@@ -360,19 +365,19 @@ public class WeeiaParser implements Parser {
 
 	private void parseDay(UniversityClass uniClass, String day) {
 		switch(day.toLowerCase()){
-		case "poniedzia³ek":
+		case "poniedziaÅ‚ek":
 			uniClass.setWeekday(Weekday.MONDAY);
 			break;
 		case "wtorek":
 			uniClass.setWeekday(Weekday.TUESDAY);
 			break;
-		case "œroda":
+		case "Å›roda":
 			uniClass.setWeekday(Weekday.WEDNESDAY);
 			break;
 		case "czwartek":
 			uniClass.setWeekday(Weekday.THURSDAY);
 			break;
-		case "pi¹tek":
+		case "piÄ…tek":
 			uniClass.setWeekday(Weekday.FRIDAY);
 			break;
 		}

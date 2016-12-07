@@ -51,14 +51,14 @@ public class UniversityClass implements Serializable {
     @Column(name = "weekday")
     private Weekday weekday;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "university_class_weeks",
                joinColumns = @JoinColumn(name="university_classes_id", referencedColumnName="ID"),
                inverseJoinColumns = @JoinColumn(name="weeks_id", referencedColumnName="ID"))
     private Set<Week> weeks = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "university_class_lecturers",
                joinColumns = @JoinColumn(name="university_classes_id", referencedColumnName="ID"),

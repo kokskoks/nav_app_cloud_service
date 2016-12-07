@@ -3,6 +3,9 @@ package pl.lodz.p.ind179640.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import pl.lodz.p.ind179640.domain.Building;
 import pl.lodz.p.ind179640.service.BuildingService;
+import pl.lodz.p.ind179640.service.parser.VersionUpdate;
+import pl.lodz.p.ind179640.service.parser.universal.BuildingsParser;
+import pl.lodz.p.ind179640.service.parser.weeia.WeeiaParser;
 import pl.lodz.p.ind179640.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +44,7 @@ public class BuildingResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @VersionUpdate(name = BuildingsParser.PARSER_NAME)
     public ResponseEntity<Building> createBuilding(@RequestBody Building building) throws URISyntaxException {
         log.debug("REST request to save Building : {}", building);
         if (building.getId() != null) {
@@ -65,6 +69,7 @@ public class BuildingResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @VersionUpdate(name = BuildingsParser.PARSER_NAME)
     public ResponseEntity<Building> updateBuilding(@RequestBody Building building) throws URISyntaxException {
         log.debug("REST request to update Building : {}", building);
         if (building.getId() == null) {
@@ -120,6 +125,7 @@ public class BuildingResource {
         method = RequestMethod.DELETE,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @VersionUpdate(name = BuildingsParser.PARSER_NAME)
     public ResponseEntity<Void> deleteBuilding(@PathVariable Long id) {
         log.debug("REST request to delete Building : {}", id);
         buildingService.delete(id);

@@ -3,6 +3,8 @@ package pl.lodz.p.ind179640.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import pl.lodz.p.ind179640.domain.Sublocation;
 import pl.lodz.p.ind179640.service.SublocationService;
+import pl.lodz.p.ind179640.service.parser.VersionUpdate;
+import pl.lodz.p.ind179640.service.parser.universal.BuildingsParser;
 import pl.lodz.p.ind179640.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +43,7 @@ public class SublocationResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @VersionUpdate(name = BuildingsParser.PARSER_NAME)
     public ResponseEntity<Sublocation> createSublocation(@RequestBody Sublocation sublocation) throws URISyntaxException {
         log.debug("REST request to save Sublocation : {}", sublocation);
         if (sublocation.getId() != null) {
@@ -65,6 +68,7 @@ public class SublocationResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @VersionUpdate(name = BuildingsParser.PARSER_NAME)
     public ResponseEntity<Sublocation> updateSublocation(@RequestBody Sublocation sublocation) throws URISyntaxException {
         log.debug("REST request to update Sublocation : {}", sublocation);
         if (sublocation.getId() == null) {
@@ -120,6 +124,7 @@ public class SublocationResource {
         method = RequestMethod.DELETE,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @VersionUpdate(name = BuildingsParser.PARSER_NAME)
     public ResponseEntity<Void> deleteSublocation(@PathVariable Long id) {
         log.debug("REST request to delete Sublocation : {}", id);
         sublocationService.delete(id);

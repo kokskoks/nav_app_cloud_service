@@ -17,6 +17,7 @@ import pl.lodz.p.ind179640.domain.Sublocation;
 import pl.lodz.p.ind179640.repository.BuildingRepository;
 import pl.lodz.p.ind179640.repository.SublocationRepository;
 import pl.lodz.p.ind179640.service.parser.Parser;
+import pl.lodz.p.ind179640.service.parser.VersionUpdate;
 
 @Component(BuildingsParser.PARSER_NAME)
 @Transactional
@@ -51,6 +52,7 @@ public class BuildingsParser implements Parser {
 	}
 
 	@Override
+	@VersionUpdate(name = BuildingsParser.PARSER_NAME)
 	public void parse(byte[] bytes) {
 		
 		try(Scanner buildingsScanner = new Scanner(new ByteArrayInputStream(bytes), StandardCharsets.UTF_8.name())){

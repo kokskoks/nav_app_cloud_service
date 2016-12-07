@@ -3,6 +3,8 @@ package pl.lodz.p.ind179640.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import pl.lodz.p.ind179640.domain.Lecturer;
 import pl.lodz.p.ind179640.service.LecturerService;
+import pl.lodz.p.ind179640.service.parser.VersionUpdate;
+import pl.lodz.p.ind179640.service.parser.weeia.WeeiaParser;
 import pl.lodz.p.ind179640.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +43,7 @@ public class LecturerResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @VersionUpdate(name = WeeiaParser.PARSER_NAME)
     public ResponseEntity<Lecturer> createLecturer(@RequestBody Lecturer lecturer) throws URISyntaxException {
         log.debug("REST request to save Lecturer : {}", lecturer);
         if (lecturer.getId() != null) {
@@ -65,6 +68,7 @@ public class LecturerResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @VersionUpdate(name = WeeiaParser.PARSER_NAME)
     public ResponseEntity<Lecturer> updateLecturer(@RequestBody Lecturer lecturer) throws URISyntaxException {
         log.debug("REST request to update Lecturer : {}", lecturer);
         if (lecturer.getId() == null) {
@@ -120,6 +124,7 @@ public class LecturerResource {
         method = RequestMethod.DELETE,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @VersionUpdate(name = WeeiaParser.PARSER_NAME)
     public ResponseEntity<Void> deleteLecturer(@PathVariable Long id) {
         log.debug("REST request to delete Lecturer : {}", id);
         lecturerService.delete(id);

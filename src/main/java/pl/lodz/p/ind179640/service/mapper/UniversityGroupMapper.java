@@ -1,10 +1,12 @@
 package pl.lodz.p.ind179640.service.mapper;
 
-import pl.lodz.p.ind179640.domain.*;
-import pl.lodz.p.ind179640.service.dto.UniversityGroupDTO;
-
-import org.mapstruct.*;
 import java.util.List;
+
+import org.mapstruct.Mapper;
+
+import pl.lodz.p.ind179640.domain.UniversityClass;
+import pl.lodz.p.ind179640.domain.UniversityGroup;
+import pl.lodz.p.ind179640.service.dto.UniversityGroupDTO;
 
 /**
  * Mapper for the entity UniversityGroup and its DTO UniversityGroupDTO.

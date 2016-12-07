@@ -3,6 +3,8 @@ package pl.lodz.p.ind179640.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import pl.lodz.p.ind179640.domain.Classroom;
 import pl.lodz.p.ind179640.service.ClassroomService;
+import pl.lodz.p.ind179640.service.parser.VersionUpdate;
+import pl.lodz.p.ind179640.service.parser.weeia.WeeiaParser;
 import pl.lodz.p.ind179640.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +43,7 @@ public class ClassroomResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @VersionUpdate(name = WeeiaParser.PARSER_NAME)
     public ResponseEntity<Classroom> createClassroom(@RequestBody Classroom classroom) throws URISyntaxException {
         log.debug("REST request to save Classroom : {}", classroom);
         if (classroom.getId() != null) {
@@ -65,6 +68,7 @@ public class ClassroomResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @VersionUpdate(name = WeeiaParser.PARSER_NAME)
     public ResponseEntity<Classroom> updateClassroom(@RequestBody Classroom classroom) throws URISyntaxException {
         log.debug("REST request to update Classroom : {}", classroom);
         if (classroom.getId() == null) {
@@ -120,6 +124,7 @@ public class ClassroomResource {
         method = RequestMethod.DELETE,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @VersionUpdate(name = WeeiaParser.PARSER_NAME)
     public ResponseEntity<Void> deleteClassroom(@PathVariable Long id) {
         log.debug("REST request to delete Classroom : {}", id);
         classroomService.delete(id);
